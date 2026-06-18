@@ -26,6 +26,8 @@
 </style>
 
 @php
+   $disabled = request()->routeIs('admin.building.create');
+
     $tabs = [
         [
             'title' => 'Basic',
@@ -51,8 +53,8 @@
             <div class="btn-group d-block">
                 <a
                     href="{{ $tab['route'] }}"
-                    class="btn btn-{{ $tab['active'] ? 'success' : 'default' }} custom-button-group {{ isset($data->exists) ? '' : 'disabled' }}"
-                >
+                    class="btn btn-{{ $tab['active'] ? 'success' : 'default' }} custom-button-group {{ isset($data->exists) ? '' : '' }} 
+                    {{ ($disabled) && $tab['title'] != 'Basic' ? 'disabled' : '' }}">
                     <i class="fa fa-list"></i>
                     <b>{{ $tab['title'] }}</b>
                 </a>
