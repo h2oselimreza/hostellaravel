@@ -1,0 +1,25 @@
+.pointer {
+    cursor: pointer;
+}
+.invalid-feedback{
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+    font-weight: normal;
+    color: #F44336;
+}
+.alert{
+    padding: 6px 9px;
+}
+.float-left{
+    float: left;
+}
+.float-right{
+    float: right;
+}
+.created-updated{
+    margin-top: 30px;
+}
+.text-vroom-orange{
+    color: #F79522;
+}

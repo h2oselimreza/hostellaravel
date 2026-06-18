@@ -1,0 +1,51 @@
+
+    .btn3d {
+        transition:all .08s linear;
+        position:relative;
+        outline:medium none;
+        -moz-outline-style:none;
+        border:0px;
+        margin-right:10px;
+        margin-top:15px;
+        width:100px;    
+    }
+    .btn3d:focus {
+        outline:medium none;
+        -moz-outline-style:none;
+    }
+    .btn3d:active {
+        top:9px;
+    }
+    
+    .btn-default {
+        box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #adadad, 0 8px 0 1px rgba(0,0,0,0.4), 0 8px 8px 1px rgba(0,0,0,0.5);
+        background-color:#fff;
+    }
+    
+    .spinner{
+            width: 80px;
+            height: 80px;
+
+            border: 2px solid #f3f3f3;
+            border-top:3px solid #f25a41;
+            border-radius: 100%;
+
+            position: absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            right: 0;
+            margin: auto;
+		
+            animation: spin 1s infinite linear;
+	}
+
+	@keyframes spin {
+		from{
+			transform: rotate(0deg);
+		}to{
+			transform: rotate(360deg);
+		}
+	}
+
+	

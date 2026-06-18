@@ -1,0 +1,295 @@
+.bg-primary {
+    background-color: #586783;
+}
+.form-control,.form-select{
+    height: 30px;
+    font-size: 13px;
+    padding: 2px 5px 2px 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.btn{
+    border-radius: 0px;
+}
+
+.td-center{
+    text-align: center!important;
+
+}
+
+.td-right{
+    text-align: right!important;
+
+}
+
+
+
+@media (max-width:767px){
+    .navbar-brand{
+        max-width:80%;
+        margin-bottom: 3%;  
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a{
+        color:#ffffff;
+    }
+}
+
+.custom-button-group{
+    height: 40px;
+    font-size: 14px;
+} 
+
+.custom-text-danger{
+    color:red;
+    font-weight: bold;
+}
+
+.custom-table tfoot tr th{
+    padding: 0px;
+    text-align: center
+}
+.table.custom-table tr td,th{
+    padding: 2px 2px;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 13px;    
+}
+
+.table.custom-table tr th{
+    /*    padding: 2px 2px;*/
+    vertical-align: middle;
+    text-align: center;
+    font-size: 13px;    
+}
+
+.custom-table tfoot th select{
+    width:100%;
+}
+
+.spinner{width: 80px;height: 80px;border: 2px solid #f3f3f3;border-top:3px solid #f25a41;border-radius: 100%;position: absolute;top:0;bottom:0;left:0;right: 0;margin: auto;animation: spin 1s infinite linear;}
+@keyframes spin {
+    from{transform: rotate(0deg);
+    }to{transform: rotate(360deg);
+    }
+}
+#overlay{height:100%;width:100%;background:rgba(0, 0, 0, .5);position:fixed;left:0;top:0;}
+
+@media (min-width: 768px){
+    .circle-tile {
+        margin-bottom: 30px;
+    }
+}
+
+.circle-tile {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.circle-tile-heading {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto -40px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 100%;
+    color: #fff;
+    transition: all ease-in-out .3s;
+}
+
+
+.circle-tile-heading .fa {
+    line-height: 66px;
+}
+
+.circle-tile-content {
+    padding-top: 50px;
+}
+.circle-tile-description {
+    text-transform: uppercase;
+}
+.dark-blue {
+    background-color: #34495e;
+}
+
+.text-faded {
+    color: rgba(255,255,255,0.7);
+}
+
+.circle-tile-number {
+    padding: 5px 0 15px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.circle-tile-footer {
+    display: block;
+    padding: 5px;
+    color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.1);
+    transition: all ease-in-out .3s;
+}
+
+.circle-tile-footer:hover {
+    text-decoration: none;
+    color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.2);
+}
+.blue {
+    background-color: #2980b9;
+}
+
+ul.dropdown-menu.pull-right li{
+    text-align: left!important;
+}
+
+.btn-circle-vairant {
+    width: 27px;
+    height: 27px;
+    text-align: center;
+    padding: 4px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.btn-circle-puchase{
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding: 0px 0;
+    font-size: 10px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.headingTable tr td,th{
+    padding: 10px;
+    text-align: justify;
+}
+
+/* -------- dashboard ---------*/
+
+/* Infobox ===================================== */
+.info-box {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    height: 80px;
+    display: flex;
+    cursor: default;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 5px; }
+.info-box .icon {
+    display: inline-block;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.12);
+    width: 80px; }
+.info-box .icon i {
+    padding: 10px;
+    color: #fff;
+    font-size: 50px;
+    line-height: 61px; }
+.info-box .icon .chart.chart-bar {
+    height: 100%;
+    line-height: 100px; }
+.info-box .icon .chart.chart-bar canvas {
+    vertical-align: baseline !important; }
+.info-box .icon .chart.chart-pie {
+    height: 100%;
+    line-height: 123px; }
+.info-box .icon .chart.chart-pie canvas {
+    vertical-align: baseline !important; }
+.info-box .icon .chart.chart-line {
+    height: 100%;
+    line-height: 115px; }
+.info-box .icon .chart.chart-line canvas {
+    vertical-align: baseline !important; }
+.info-box .contentInfo {
+    display: inline-block;
+    padding: 7px 10px; }
+.info-box .contentInfo .text {
+    font-size: 14px;
+    margin-top: 11px;
+    color: #555; }
+.info-box .contentInfo .number {
+    font-weight: normal;
+    font-size: 26px;
+    margin-top: -4px;
+    color: #555; }
+
+.info-box.hover-zoom-effect .icon {
+    overflow: hidden; }
+.info-box.hover-zoom-effect .icon i {
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease; }
+
+.info-box.hover-zoom-effect:hover .icon i {
+    opacity: 0.4;
+    -moz-transform: rotate(-32deg) scale(1.4);
+    -ms-transform: rotate(-32deg) scale(1.4);
+    -o-transform: rotate(-32deg) scale(1.4);
+    -webkit-transform: rotate(-32deg) scale(1.4);
+    transform: rotate(-32deg) scale(1.4); }
+
+.info-box.hover-expand-effect:after {
+    background-color: rgba(0, 0, 0, 0.05);
+    content: ".";
+    position: absolute;
+    left: 80px;
+    top: 0;
+    width: 0;
+    height: 100%;
+    color: transparent;
+    -moz-transition: all 0.95s;
+    -o-transition: all 0.95s;
+    -webkit-transition: all 0.95s;
+    transition: all 0.95s; }
+
+.info-box.hover-expand-effect:hover:after {
+    width: 100%; }
+
+.bg-red {
+    background-color: #F44336 !important;
+    color: #fff; }
+
+.info-box .content {
+    display: inline-block;
+    padding: 7px 10px; }
+
+.bg-dark-blue {
+    background-color: #4f6184 !important;
+    color: #fff; }
+.bg-dark-blue .content .text,
+.bg-dark-blue .content .number {
+    color: #fff !important; }
+
+.bg-dark-green {
+    background-color: #287575 !important;
+    color: #fff; }
+.bg-dark-green .content .text,
+.bg-dark-green .content .number {
+    color: #fff !important; }
+
+
+.bg-dark-red {
+    background-color: #964545 !important;
+    color: #fff; }
+.bg-dark-red .content .text,
+.bg-dark-red .content .number {
+    color: #fff !important; }
+
+.bg-dark-brown {
+    background-color: #846048 !important;
+    color: #fff; }
+.bg-dark-brown .content .text,
+.bg-dark-brown .content .number {
+    color: #fff !important; }
+

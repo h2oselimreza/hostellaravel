@@ -1,0 +1,83 @@
+@extends('layouts.app')
+@section('content')
+
+<div class="header dashboard_from">
+    <h1 class="page-title">Expense</h1>
+    <ul class="breadcrumb">
+        <li><a href="{{ url('admin/dashboard') }} ">Home</a></li>
+        <li><a href="#">/ Master Data</a></li>
+        <li><a href="{{ url('admin/master-data/expense') }}">/ Expense</a></li>
+    </ul>
+</div>
+<div class="main-content">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            
+            @include('admin.master-data.expense-head.tab')
+
+            <div class="panel panel-default"> 
+                <div class="row justify-content-center text-center">
+
+                    <!-- category -->
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading dark-blue">
+                                    <i class="fa fa-bars fa-fw fa-2x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-blue">
+                                <div class="circle-tile-description text-faded">
+                                    Expense Category
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    {{ $costCategoryCount }}
+                                    <span id="sparklineA"></span>
+                                </div>
+                                <a href="#" class="circle-tile-footer" onclick="areaRoute('master-data/cost-category')">
+                                    View <i class="fa fa-chevron-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- product -->
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="circle-tile">
+                            <a href="#">
+                                <div class="circle-tile-heading dark-blue">
+                                    <i class="fa fa-list fa-fw fa-2x"></i>
+                                </div>
+                            </a>
+                            <div class="circle-tile-content dark-blue">
+                                <div class="circle-tile-description text-faded">
+                                    Expense Head
+                                </div>
+                                <div class="circle-tile-number text-faded">
+                                    {{ $costHeadCount }}
+                                    <span id="sparklineA"></span>
+                                </div>
+                                <a href="#" class="circle-tile-footer" onclick="areaRoute('master-data/cost-head')">
+                                    View <i class="fa fa-chevron-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
+@push('scripts')
+<script>
+    $(document).ready(function () {
+
+        $('#datatable').DataTable({
+            processing: true,
+            serverSide: true,
+        });
+
+    });
+@endpush

@@ -1,0 +1,379 @@
+.text-center {
+    text-align: center !important;
+}
+.header {
+    margin-bottom: 12px;
+}
+.add-button {
+    display: inline-block;
+    background-color: #eeeeee;
+    margin-bottom: 12px;
+}
+.add-button a {
+    display: inline-block;
+    padding: 4px 14px;
+    font-size: 13px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+}
+label {
+    color: #444;
+    font-weight: normal;
+}
+.from-field {
+    margin-bottom: 20px;
+}
+.from-field input,
+.from-field select {
+    border-radius: 5px;
+}
+.panel-heading {
+    font-weight: 600;
+    font-size: 14px !important;
+}
+.panel-footer .btn-default {
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, #e2e2e2),
+        color-stop(1, #fafafa)
+    );
+    font-size: 15px;
+    padding: 2px 12px 2px 12px;
+}
+.panel-footer .from-btn {
+    height: 30px;
+    padding: 2px 12px 2px 12px;
+}
+.text-danger {
+    font-size: 13px;
+}
+.action_button_modify {
+    font-size: 12px;
+}
+#sideNavigation i {
+    color: #fff;
+}
+.navbar-brand {
+    color: #fff !important;
+    padding: 15px !important;
+    font-size: 18px !important;
+    line-height: 20px !important;
+    height: 50px !important;
+}
+.navbar-nav .dropdown-toggle {
+    color: #fff;
+}
+.navbar-nav .dropdown-toggle:focus {
+    color: #fff;
+}
+.list-unstyled li ul {
+    background-color: #f5f5f6;
+}
+.list-unstyled li ul li {
+    padding: 8px 0px;
+}
+.list-unstyled li ul li:hover {
+    background-color: #d2d2dd;
+}
+.list-unstyled li ul {
+    padding-left: 0px !important;
+}
+.list-unstyled li ul li a {
+    margin-left: 22px;
+}
+.list-unstyled ul li a {
+    font-size: 15px;
+}
+#datatable_wrapper .dt-length select {
+    width: 75px;
+    margin-right: 7px;
+}
+.form-label {
+    font-weight: bold;
+    font-size: 14px;
+}
+.card-header {
+    background: #e6e6e6;
+}
+.dashboard_from .page-title {
+    font-size: 20px;
+}
+.breadcrumb li {
+    padding-left: 3px;
+}
+.main-content .alert-dismissible .btn-close {
+    top: -8px;
+}
+#employeeTab .active {
+    background-color: #556665;
+    background-image: -webkit-gradient(
+        linear,
+        0 0,
+        0 100%,
+        from(#617473),
+        to(#556665)
+    );
+    border: 1px solid #495857;
+    font-weight: normal;
+    color: #fff !important;
+}
+#employeeTab > li {
+    margin-bottom: 0px;
+}
+#employeeTab li button {
+    padding: 8px 48px;
+    color: #6c757d;
+}
+
+.custom-check .form-check-input {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    border: 1px solid #687898;
+}
+
+/* Add custom color */
+.custom-check .form-check-input:checked {
+    background-color: #198754; /* Green */
+    border-color: #198754;
+}
+
+/* Optional hover effect */
+.custom-check .form-check-input:hover {
+    border-color: #0d6efd;
+}
+
+/* Align label vertically */
+.custom-check .form-check-label {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#addEduQualiButton,
+#removeEduQualiButton,
+.remove_button {
+    padding: 2px 18px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+#updateEmployeeSubmit,
+.profile_photo {
+    padding: 5px 18px;
+    border-radius: 5px;
+    margin-top: 14px;
+}
+.experience_title {
+    border-bottom: 1px solid #ddd;
+    padding: 0px 0px 15px 0px;
+    margin-bottom: 20px;
+}
+#employeeTab .nav-link {
+    color: #000;
+    font-size: 14px;
+}
+#employeeTab .nav_item {
+    color: #aba9a9;
+}
+
+.add_button {
+    padding: 2px 18px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.profile-image {
+    width: 170px;
+    height: 181px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+#sideNavBar .nav-item {
+    line-height: 2.5em;
+}
+
+#sideNavBar .nav-link {
+    border-top: 1px solid #fcfcfc;
+    border-bottom: 1px solid #c8c8cb;
+    background: #efeff0;
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, #efeff0),
+        color-stop(1, #fafafa)
+    );
+    background: -ms-linear-gradient(bottom, #efeff0, #fafafa);
+    background: -moz-linear-gradient(center bottom, #efeff0 0%, #fafafa 100%);
+    background: -o-linear-gradient(bottom, #efeff0, #fafafa);
+    filter: progid:dximagetransform.microsoft.gradient(startColorStr='#e3e3e3', EndColorStr='#ffffff');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa',EndColorStr='#efeff0')";
+    border-left: none;
+    color: #444;
+    display: block;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 0px 6px 0px 7px;
+    margin-bottom: 0px;
+    text-shadow: none;
+    text-transform: none;
+}
+.table tbody tr td:not(.text-center) {
+    padding-left: 8px !important;
+}
+.card-footer button,
+.card-footer a {
+    padding: 5px 16px;
+    font-size: 15px;
+    border-radius: 4px;
+}
+#datatable .dropdown button {
+    background: transparent;
+    color: #000;
+    border: 1px solid #ddd;
+    font-size: 13px;
+}
+.dt-empty {
+    text-align: center !important;
+}
+.save_button {
+    padding: 4px 13px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+input[type="checkbox"] {
+    border: 1px solid #b0a7a7;
+    border-radius: 4px;
+}
+
+.form-control,
+.form-select {
+    font-size: 12px;
+    padding: 5px 5px 5px 5px;
+}
+
+table.dataTable thead th {
+    background-color: #586783;
+    color: white;
+}
+
+table.dataTable .dt-column-header {
+    color: white;
+}
+.image_block {
+    width: auto !important;
+}
+.image_block_inner .checkbox {
+    left: -21px !important;
+    top: -3px !important;
+    box-shadow: none;
+}
+.image_block_inner img {
+    border-radius: 5px;
+}
+.gallery_image_reload {
+    color: #0d6efd;
+}
+.member_bulk_sms .bg-info {
+    background: #d9edf7 !important;
+}
+.member_bulk_sms .bg-warning {
+    background: #fcf8e3 !important;
+}
+.border-ccc {
+    border: 1px solid #ccc !important;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 18px;
+}
+.border-ccc .col-md-4 {
+    padding: 0px;
+}
+
+.border-ccc .col-md-4:not(:last-child),
+.border-ccc .col:not(:last-child) {
+    border-right: 1px solid #ccc;
+}
+.border-ccc .btn-group,
+.border-ccc button {
+    width: 100% !important;
+}
+.vehicle-table thead tr th:not(:last-child) {
+    text-align: left !important;
+}
+.table-align thead tr th:not(:last-child) {
+    text-align: left !important;
+}
+/*============data show page custom css========*/
+.data_view .card-header {
+    font-weight: 600;
+    font-size: 15px;
+    color: #555;
+}
+.data_view .label {
+    font-weight: 500;
+    color: #555;
+    font-size: 14px;
+}
+.data_view .value {
+    font-weight: 500;
+    color: #222;
+    font-size: 13px;
+}
+.data_view .row-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+.data_view .row-item:last-child {
+    border-bottom: none;
+}
+.active_button {
+    border: none !important;
+    font-size: 16px !important;
+    margin-left: 4px !important;
+}
+div.dt-container .dt-search input {
+    padding: 0px;
+}
+.collapse {
+    visibility: unset;
+  }
+.table-responsive .dropdown-menu {
+    transform: none !important;
+}
+.vehicleServicelist{
+    margin-left: 14px;
+    line-height: 24px;
+}
+.text-dark-blue{
+    color: #428bca
+}
+.table-td-info td {
+    font-size: 12px;
+}
+#serviceTableDiv .bg-info th{
+    background-color: #d9edf7;
+}
+.swal-footer{
+    text-align: center;
+}
+.accordion-button{
+    padding: 11px;
+}
+
+input[readonly] {
+    background-color: #f5f5f5 !important;
+    color: #555;
+    cursor: not-allowed;
+}
+.swal2-cancel, .swal2-confirm, .swal-button{
+    padding: 5px 16px !important;
+}
+textarea {
+    height: 55px !important;
+}
+.bg-color{
+    background-color: #d9edf7;
+    border-radius: 5px;
+}
