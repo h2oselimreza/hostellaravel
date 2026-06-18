@@ -17,9 +17,13 @@
 </style>
 
 <div class="header dashboard_from">
-    <h1 class="page-title">
-        {{ isset($data->exists) ? 'Edit Workshop Attachment' : 'Add Workshop' }}
-    </h1>
+    <h1 class="page-title">Update Information</h1>
+    <ul class="breadcrumb">
+        <li><a href="{{ url('admin/dashboard') }}">Home</a></li>
+        <li><a href="#">/ Master Data</a> / </li>
+        <li><a href="{{ url('admin/building') }}">Building</a></li>
+        <li><a href="{{ route('admin.building.update',[$data->building_code]) }}">/ Update Building</a></li>
+    </ul>
 </div>
 
 @php
