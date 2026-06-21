@@ -78,6 +78,7 @@ use App\Http\Controllers\Admin\RMAssign\RMAssignController;
 use App\Http\Controllers\Admin\Room\RoomAdditionalImageController;
 use App\Http\Controllers\Admin\Room\RoomController;
 use App\Http\Controllers\Admin\Room\RoomImageController;
+use App\Http\Controllers\Admin\Seat\SeatTypeController;
 use App\Http\Controllers\Admin\SubModuleController;
 use App\Http\Controllers\Admin\UserGroupController;
 use App\Http\Controllers\Admin\WorkingExperienceController;
@@ -229,12 +230,16 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::resource('master-data/floor/profile-picture', FloorImageController::class)->names('admin.floor.profile-picture');
     Route::resource('master-data/floor/additional-images', FloorAdditionalImageController::class)->names('admin.floor.additional-images');
 
-    /*===============floor route==================*/
+    /*===============room route==================*/
     Route::resource('master-data/room', RoomController::class)->names('admin.room');
     Route::post('master-data/room/check-duplicate', [RoomController::class, 'checkDuplicateRoom'])->name('admin.room.check-duplicate-room');
     Route::get('master-data/get-floors', [RoomController::class, 'getFloors'])->name('admin.get.floors');
     Route::resource('master-data/room/profile-picture', RoomImageController::class)->names('admin.room.profile-picture');
     Route::resource('master-data/room/additional-images', RoomAdditionalImageController::class)->names('admin.room.additional-images');
+
+     /*===============seat type route==================*/
+    Route::resource('master-data/seat-type', SeatTypeController::class)->names('admin.seat.type');
+    Route::post('master-data/seat-type/check-duplicate', [SeatTypeController::class, 'checkDuplicateSeatType'])->name('admin.seat.type.check.duplicate');
 
 });
 
