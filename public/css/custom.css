@@ -250,7 +250,11 @@ input[type="checkbox"] {
 .form-control,
 .form-select {
     font-size: 12px;
-    padding: 5px 5px 5px 5px;
+    padding: 2px 5px 3px 5px;
+    border: 1px solid #ccc;
+}
+.form-select {
+    border-radius: 5px;
 }
 
 table.dataTable thead th {

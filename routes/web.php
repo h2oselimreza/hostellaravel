@@ -23,6 +23,9 @@ use App\Http\Controllers\Admin\EmployeeAnniversaryOrBirthdayCardController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\EmployeeEducationController;
 use App\Http\Controllers\Admin\EmployeeOfficeController;
+use App\Http\Controllers\Admin\Floor\FloorAdditionalImageController;
+use App\Http\Controllers\Admin\Floor\FloorController;
+use App\Http\Controllers\Admin\Floor\FloorImageController;
 use App\Http\Controllers\Admin\HomeService\EmployeeHomeServiceController;
 use App\Http\Controllers\Admin\HomeService\HomeServiceAssignToEmployeeController;
 use App\Http\Controllers\Admin\HomeService\HomeServiceController as HomeServiceHomeServiceController;
@@ -216,6 +219,12 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::resource('master-data/building', BuildingBuildingController::class)->names('admin.building');
     Route::resource('master-data/building/profile-picture', BuildingProfilePictureController::class)->names('admin.building.profile-picture');
     Route::resource('master-data/building/additional-images', BuildingAdditionalImagesController::class)->names('admin.building.additional-images');
+
+    /*===============building route==================*/
+    Route::resource('master-data/floor', FloorController::class)->names('admin.floor');
+    Route::post('master-data/floor/check-duplicate', [FloorController::class, 'checkDuplicateFloor'])->name('admin.floor.check-duplicate-floor');
+    Route::resource('master-data/floor/profile-picture', FloorImageController::class)->names('admin.floor.profile-picture');
+    Route::resource('master-data/floor/additional-images', FloorAdditionalImageController::class)->names('admin.floor.additional-images');
 
 });
 

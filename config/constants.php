@@ -250,5 +250,9 @@ return [
 
     'ATTACHMENT_FILE'  => 'attachment',
     'BUILDING_CODE' => 'BLD',
+    'FLOOR_CODE' => 'FLR',
+    'ROOM_CODE' => 'RM',
+    'SEAT_CODE' => 'ST',
+    'SEAT_TYPE_CODE' => 'STTYP',
     
 ];
