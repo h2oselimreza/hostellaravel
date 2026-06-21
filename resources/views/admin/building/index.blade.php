@@ -7,7 +7,7 @@
     <ul class="breadcrumb">
         <li><a href="{{ url('admin/dashboard') }}">Home</a></li>
         <li><a href="#">/ Master Data</a></li>
-        <li><a href="{{ url('admin/building') }}">/ Building</a></li>
+        <li><a href="{{ url('admin/master-data/building') }}">/ Building</a></li>
     </ul>
 </div>
 <div class="main-content">
@@ -67,7 +67,7 @@
                                                         <span class="ui-button-text">Update</span>
                                                     </a>                                    
                                                 </li>
-                                                <li class="mt-2">
+                                                {{-- <li class="mt-2">
                                                     <form action="#" method="POST">
                                                         @csrf
                                                         <button type="submit" class="d-block ps-3 active_button">
@@ -76,7 +76,7 @@
                                                             </span>
                                                         </button>
                                                     </form>
-                                                </li>
+                                                </li> --}}
                                             </ul>
                                         </div>
                                     </td>
