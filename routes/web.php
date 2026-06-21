@@ -75,6 +75,9 @@ use App\Http\Controllers\Admin\Place\PlaceTimeScheduleController;
 use App\Http\Controllers\Admin\ProfilePhotoController;
 use App\Http\Controllers\Admin\Quotation\QuotationController as QuotationQuotationController;
 use App\Http\Controllers\Admin\RMAssign\RMAssignController;
+use App\Http\Controllers\Admin\Room\RoomAdditionalImageController;
+use App\Http\Controllers\Admin\Room\RoomController;
+use App\Http\Controllers\Admin\Room\RoomImageController;
 use App\Http\Controllers\Admin\SubModuleController;
 use App\Http\Controllers\Admin\UserGroupController;
 use App\Http\Controllers\Admin\WorkingExperienceController;
@@ -220,11 +223,18 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::resource('master-data/building/profile-picture', BuildingProfilePictureController::class)->names('admin.building.profile-picture');
     Route::resource('master-data/building/additional-images', BuildingAdditionalImagesController::class)->names('admin.building.additional-images');
 
-    /*===============building route==================*/
+    /*===============floor route==================*/
     Route::resource('master-data/floor', FloorController::class)->names('admin.floor');
     Route::post('master-data/floor/check-duplicate', [FloorController::class, 'checkDuplicateFloor'])->name('admin.floor.check-duplicate-floor');
     Route::resource('master-data/floor/profile-picture', FloorImageController::class)->names('admin.floor.profile-picture');
     Route::resource('master-data/floor/additional-images', FloorAdditionalImageController::class)->names('admin.floor.additional-images');
+
+    /*===============floor route==================*/
+    Route::resource('master-data/room', RoomController::class)->names('admin.room');
+    Route::post('master-data/room/check-duplicate', [RoomController::class, 'checkDuplicateRoom'])->name('admin.room.check-duplicate-room');
+    Route::get('master-data/get-floors', [RoomController::class, 'getFloors'])->name('admin.get.floors');
+    Route::resource('master-data/room/profile-picture', RoomImageController::class)->names('admin.room.profile-picture');
+    Route::resource('master-data/room/additional-images', RoomAdditionalImageController::class)->names('admin.room.additional-images');
 
 });
 

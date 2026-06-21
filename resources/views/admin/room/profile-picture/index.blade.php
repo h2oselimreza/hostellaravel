@@ -7,14 +7,14 @@
     <ul class="breadcrumb">
         <li><a href="{{ url('admin/dashboard') }}">Home</a></li>
         <li><a href="#">/ Master Data</a> / </li>
-        <li><a href="{{ url('admin/floor') }}">Floor</a></li>
-        <li><a href="{{ route('admin.floor.update',[$data->floor_code]) }}">/ Update Floor</a></li>
+        <li><a href="{{ url('admin/room') }}">Room</a></li>
+        <li><a href="{{ route('admin.room.update',[$data->room_code]) }}">/ Update Room</a></li>
     </ul>
 </div>
 
 <div class="main-content">
     
-    @include('admin.floor.tab')
+    @include('admin.room.tab')
 
     <div class="card from_card">
         <!-- Success Message -->
@@ -39,7 +39,7 @@
 
         <div class="card-body" x-data="vehicleForm()">
             <form 
-                action="{{ isset($data->exists) ? route('admin.floor.profile-picture.update', $data->floor_code) : route('admin.floor.store') }}"
+                action="{{ isset($data->exists) ? route('admin.room.profile-picture.update', $data->room_code) : route('admin.room.store') }}"
                 method="POST" enctype="multipart/form-data"
             >
                 @csrf
@@ -52,11 +52,11 @@
                             <label class="mb-2">Image (300px X 300px)</label>
 
                             {{-- Show Current Image --}}
-                            @if($data->floor_image)
+                            @if($data->room_image)
                                 <img
-                                    src="{{ asset('storage/assets/admin/images/floor/' . $data->floor_image) }}"
+                                    src="{{ asset('storage/assets/admin/images/room/' . $data->room_image) }}"
                                     class="profile-image"
-                                    alt="Building Image">
+                                    alt="room Image">
                             @else
                                 <img
                                     src="{{ asset('assets/images/company/no_image.jpg') }}"
@@ -66,13 +66,13 @@
 
                             <input type="file"
                                 class="form-control w-auto"
-                                name="floor_image"
+                                name="room_image"
                                 id="aboutImage"
                                 onchange="imageShow(this, this.id);"
                                 >
 
-                            <input type="hidden" name="old_image" value="{{ $data->floor_image ?? "" }}">
-                            @error('floor_image')
+                            <input type="hidden" name="old_image" value="{{ $data->room_image ?? "" }}">
+                            @error('room_image')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
