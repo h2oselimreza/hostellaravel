@@ -96,6 +96,7 @@ use App\Http\Controllers\Admin\Workshop\WorkshopController;
 use App\Http\Controllers\Admin\Workshop\WorkshopVehicleTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\Vendor\VendorController;
 use App\Http\Controllers\Admin\Workshop\ServiceController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BuildingController;
@@ -251,7 +252,7 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::resource('master-data/room/profile-picture', RoomImageController::class)->names('admin.room.profile-picture');
     Route::resource('master-data/room/additional-images', RoomAdditionalImageController::class)->names('admin.room.additional-images');
 
-     /*===============seat type route==================*/
+    /*===============seat type route==================*/
     Route::resource('master-data/seat-type', SeatTypeController::class)->names('admin.seat.type');
     Route::post('master-data/seat-type/check-duplicate', [SeatTypeController::class, 'checkDuplicateSeatType'])->name('admin.seat.type.check.duplicate');
 
@@ -261,6 +262,9 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::get('master-data/get-rooms', [SeatController::class, 'getRooms'])->name('admin.get.rooms');
     Route::resource('master-data/seat/profile-picture', SeatImageController::class)->names('admin.seat.image');
     Route::resource('master-data/seat/additional-images', SeatAdditionalImageController::class)->names('admin.seat.additional.image');
+
+    /*===============Vendor routes==================*/
+    Route::resource('master-data/vendor', VendorController::class)->names('admin.master.data.vendor');
 });
 
 require __DIR__.'/auth.php';
