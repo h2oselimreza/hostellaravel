@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
 class RoomController extends Controller
 {
     public function index(){
-        $data = Room::get();
+        $data = Room::with('floorInfo','floorInfo.buildingInfo')->get();
         return view('admin.room.index',compact('data'));
     }
 

@@ -78,6 +78,9 @@ use App\Http\Controllers\Admin\RMAssign\RMAssignController;
 use App\Http\Controllers\Admin\Room\RoomAdditionalImageController;
 use App\Http\Controllers\Admin\Room\RoomController;
 use App\Http\Controllers\Admin\Room\RoomImageController;
+use App\Http\Controllers\Admin\Seat\SeatAdditionalImageController;
+use App\Http\Controllers\Admin\Seat\SeatController;
+use App\Http\Controllers\Admin\Seat\SeatImageController;
 use App\Http\Controllers\Admin\Seat\SeatTypeController;
 use App\Http\Controllers\Admin\SubModuleController;
 use App\Http\Controllers\Admin\UserGroupController;
@@ -241,6 +244,12 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::resource('master-data/seat-type', SeatTypeController::class)->names('admin.seat.type');
     Route::post('master-data/seat-type/check-duplicate', [SeatTypeController::class, 'checkDuplicateSeatType'])->name('admin.seat.type.check.duplicate');
 
+    /*===============seat route==================*/
+    Route::resource('master-data/seat', SeatController::class)->names('admin.seat');
+    Route::post('master-data/seat/check-duplicate', [SeatController::class, 'checkDuplicateSeat'])->name('admin.seat.check.duplicate.seat');
+    Route::get('master-data/get-rooms', [SeatController::class, 'getRooms'])->name('admin.get.rooms');
+    Route::resource('master-data/seat/profile-picture', SeatImageController::class)->names('admin.seat.image');
+    Route::resource('master-data/seat/additional-images', SeatAdditionalImageController::class)->names('admin.seat.additional.image');
 });
 
 require __DIR__.'/auth.php';

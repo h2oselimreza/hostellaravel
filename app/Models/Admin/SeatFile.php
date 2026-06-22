@@ -9,6 +9,9 @@ class SeatFile extends BaseModel
 {
     protected $table = 'hst_seat_file';
 
+    public const IMAGE_PATH = 'assets/admin/images/seat';
+
+
     protected $fillable = [
         'seat',
         'original_name',

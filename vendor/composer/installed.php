@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '8e4b48eb477354518a882838a4a33414c2bd228f',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '0dede288bb85dfbf67cc9b211aa900cb5d4ec99c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -452,9 +452,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '8e4b48eb477354518a882838a4a33414c2bd228f',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '0dede288bb85dfbf67cc9b211aa900cb5d4ec99c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1201,6 +1201,15 @@
             'install_path' => __DIR__ . '/../staabm/side-effects-detector',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'staudenmeir/belongs-to-through' => array(
+            'pretty_version' => 'v2.17',
+            'version' => '2.17.0.0',
+            'reference' => 'e45460f8eecd882e5daea2af8f948d7596c20ba0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../staudenmeir/belongs-to-through',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'symfony/clock' => array(
             'pretty_version' => 'v7.4.0',
