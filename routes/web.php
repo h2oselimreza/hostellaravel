@@ -65,6 +65,9 @@ use App\Http\Controllers\Admin\MemberPhotoController;
 use App\Http\Controllers\Admin\MemberSearchController;
 use App\Http\Controllers\Admin\MemberWorkingExperieanceController;
 use App\Http\Controllers\Admin\MasterData\AreaController;
+use App\Http\Controllers\Admin\MasterData\Income\IncomeCategoryController;
+use App\Http\Controllers\Admin\MasterData\Income\IncomeController;
+use App\Http\Controllers\Admin\MasterData\Income\IncomeHeadController;
 use App\Http\Controllers\Admin\MasterData\Vehicle\VehicleController;
 use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\ModuleGroupController;
@@ -157,6 +160,14 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::post('master-data/expense/cost-category/{code}', [CostCategoryController::class, 'toggle'])->name('admin.module.master-data.expense-category.toggle');
     Route::resource('master-data/expense/cost-head', CostHeadController::class)->names('admin.module.master-data.expense-head');
     Route::post('master-data/expense/cost-category/{code}', [CostHeadController::class, 'toggle'])->name('admin.module.master-data.expense-head.toggle');
+
+    /*===============Expense Category==================*/
+    Route::get('master-data/income', [IncomeController::class,'index'])->name('admin.module.master-data.income');
+    Route::resource('master-data/income/income-category', IncomeCategoryController::class)->names('admin.module.master-data.income-category');
+    Route::post('master-data/income/income-category/{code}', [IncomeCategoryController::class, 'toggle'])->name('admin.module.master-data.income-category.toggle');
+    Route::resource('master-data/income/income-head', IncomeHeadController::class)->names('admin.module.master-data.income-head');
+    Route::post('master-data/income/income-category/{code}', [IncomeHeadController::class, 'toggle'])->name('admin.module.master-data.income-head.toggle');
+
 
     /*===============Employee Module Route==================*/
     Route::resource('employees', EmployeeController::class)->names('admin.employee.module');

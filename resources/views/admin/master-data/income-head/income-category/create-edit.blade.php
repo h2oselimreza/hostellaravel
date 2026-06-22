@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="header dashboard_from">
-    <h1 class="page-title">Income Category</h1>
+    <h1 class="page-title">Expense Category</h1>
     <ul class="breadcrumb">
-        <li><a href="{{ url('admin/master-data/income/income-category') }}">Home</a></li>
+        <li><a href="{{ url('admin/master-data/expense/cost-category') }}">Home</a></li>
         <li><a href="#">/ Master Data</a></li>
-        <li><a href="/admin/master-data/income/income-category/create">/ Income Category</a></li>
+        <li><a href="/admin/master-data/expense/cost-category/create">/ Expense Category</a></li>
     </ul>
 </div>
 
@@ -34,7 +34,7 @@
                 </div>
             @endif
             <form 
-                action="{{ isset($data->exists) ? route('admin.module.master-data.income-category.update', $data->category_code) : route('admin.module.master-data.income-category.store') }}"
+                action="{{ isset($data->exists) ? route('admin.module.master-data.expense-category.update', $data->category_code) : route('admin.module.master-data.expense-category.store') }}"
                 method="POST"
                 @submit.prevent="submitForm($event)" 
             >
@@ -67,11 +67,11 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Income Category Name : <span>*</span></label>
+                        <label class="form-label">Expense Category Name : <span>*</span></label>
                         <input type="text" name="category_name" class="form-control"
                             x-model="formData.category_name"
                             @blur="validateField('category_name')"
-                            placeholder="Income category name"
+                            placeholder="Expense category name"
                             :class="errors.category_name ? 'is-invalid' : ''">
                         
                         <template x-if="errors.category_name">

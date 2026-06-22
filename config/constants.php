@@ -254,5 +254,7 @@ return [
     'ROOM_CODE' => 'RM',
     'SEAT_CODE' => 'ST',
     'SEAT_TYPE_CODE' => 'STTYP',
-    
+
+    'ITEM_CTG_CODE' => "ITMCATG",
+    'ITEM_HEAD_CODE' => "ITMHD",   
 ];
