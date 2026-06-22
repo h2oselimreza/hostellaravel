@@ -5,9 +5,9 @@
 <div class="header dashboard_from">
     <h1 class="page-title">Expense Category</h1>
     <ul class="breadcrumb">
-        <li><a href="{{ url('admin/master-data/cost-head') }}">Home</a></li>
+        <li><a href="{{ url('admin/master-data/expense/cost-head') }}">Home</a></li>
         <li><a href="#">/ Master Data</a></li>
-        <li><a href="/admin/master-data/cost-head/create">/ Expense Category</a></li>
+        <li><a href="/admin/master-data/expense/cost-head/create">/ Expense Category</a></li>
     </ul>
 </div>
 

@@ -1,10 +1,10 @@
 <script>
     function areaRoute(flag) {
         var routeFunction;
-        if (flag === 'master-data/cost-category') {
-            routeFunction = 'master-data/cost-category';
-        } else if (flag === 'master-data/cost-head') {
-            routeFunction = 'master-data/cost-head';
+        if (flag === 'master-data/expense/cost-category') {
+            routeFunction = 'master-data/expense/cost-category';
+        } else if (flag === 'master-data/expense/cost-head') {
+            routeFunction = 'master-data/expense/cost-head';
         }
         
         window.location.href = "/admin/" + routeFunction;
@@ -45,8 +45,8 @@ $btnFlag = "";
     <div class="col col-md-6">
         <div class="btn-group d-block" role="group">
             <button type="button"
-                onclick="areaRoute('master-data/cost-category')"
-                class="btn btn-{{ (request()->is('admin/master-data/cost-category')) ? 'success' : 'default' }} custom-button-group">
+                onclick="areaRoute('master-data/expense/cost-category')"
+                class="btn btn-{{ (request()->is('admin/master-data/expense/cost-category')) ? 'success' : 'default' }} custom-button-group">
                 <i class="fa fa-bars"></i> <b>Expense Category</b>
             </button>
         </div>
@@ -55,8 +55,8 @@ $btnFlag = "";
     <div class="col col-md-6">
         <div class="btn-group d-block" role="group">
             <button type="button"
-                onclick="areaRoute('master-data/cost-head')"
-                class="btn btn-{{ (request()->is('admin/master-data/cost-head')) ? 'success' : 'default' }} custom-button-group">
+                onclick="areaRoute('master-data/expense/cost-head')"
+                class="btn btn-{{ (request()->is('admin/master-data/expense/cost-head')) ? 'success' : 'default' }} custom-button-group">
                 <i class="fa fa-list"></i> <b>Expense Head</b>
             </button>
         </div>

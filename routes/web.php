@@ -151,12 +151,12 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::get('/sub-modules-data', [SubModuleController::class, 'getSubModulesData'])->name('sub-modules.data.index');
 
     
-    /*===============Call Center==================*/
+    /*===============Expense Category==================*/
     Route::get('master-data/expense', [ExpenseAdminController::class,'index'])->name('admin.module.master-data.expense');
-    Route::resource('master-data/cost-category', CostCategoryController::class)->names('admin.module.master-data.expense-category');
-    Route::post('master-data/cost-category/{code}', [CostCategoryController::class, 'toggle'])->name('admin.module.master-data.expense-category.toggle');
-    Route::resource('master-data/cost-head', CostHeadController::class)->names('admin.module.master-data.expense-head');
-    Route::post('master-data/cost-category/{code}', [CostHeadController::class, 'toggle'])->name('admin.module.master-data.expense-head.toggle');
+    Route::resource('master-data/expense/cost-category', CostCategoryController::class)->names('admin.module.master-data.expense-category');
+    Route::post('master-data/expense/cost-category/{code}', [CostCategoryController::class, 'toggle'])->name('admin.module.master-data.expense-category.toggle');
+    Route::resource('master-data/expense/cost-head', CostHeadController::class)->names('admin.module.master-data.expense-head');
+    Route::post('master-data/expense/cost-category/{code}', [CostHeadController::class, 'toggle'])->name('admin.module.master-data.expense-head.toggle');
 
     /*===============Employee Module Route==================*/
     Route::resource('employees', EmployeeController::class)->names('admin.employee.module');

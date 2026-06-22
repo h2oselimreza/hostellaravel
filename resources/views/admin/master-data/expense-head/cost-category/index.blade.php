@@ -7,7 +7,7 @@
     <ul class="breadcrumb">
         <li><a href="{{ url('admin/master-data/expense') }}">Home</a></li>
         <li><a href="#">/ Master Data</a></li>
-        <li><a href="{{ url('admin/master-data/cost-category') }}">/ Expense Category</a></li>
+        <li><a href="{{ url('admin/master-data/expense/cost-category') }}">/ Expense Category</a></li>
     </ul>
 </div>
 <div class="main-content">
