@@ -41,8 +41,8 @@
         ],
         [
             'title' => 'Attachment',
-            'route' => isset($data) ? route('admin.room.additional-images.edit', $data->vendor_code) : '#',
-            'active' => request()->routeIs('admin.room.additional-images.*'),
+            'route' => isset($data) ? route('admin.vendor.additional-images.edit', $data->vendor_code) : '#',
+            'active' => request()->routeIs('admin.vendor.additional-images.*'),
         ],
     ];
 @endphp

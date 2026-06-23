@@ -21,8 +21,8 @@
     <ul class="breadcrumb">
         <li><a href="{{ url('admin/dashboard') }}">Home</a></li>
         <li><a href="#">/ Master Data</a> / </li>
-        <li><a href="{{ url('admin/room') }}">Room</a></li>
-        <li><a href="{{ route('admin.room.update',[$data->room_code]) }}">/ Update Room</a></li>
+        <li><a href="{{ url('admin/vendor') }}">Vendor</a></li>
+        <li><a href="{{ route('admin.vendor.additional-images.edit',[$data->vendor_code]) }}">/ Update Vendor</a></li>
     </ul>
 </div>
 
@@ -34,7 +34,7 @@
     <div class="card shadow">
         <div class="card-body">
             <!-- Nav Tabs -->
-            @include('admin.room.tab')
+            @include('admin.master-data.vendor.tab')
             {{-- Success Message --}}
             @if(session('success'))
                 <div class="alert alert-success">
@@ -65,12 +65,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             {{-- Dropzone Upload Form --}}
-                            <form action="{{ route('admin.room.additional-images.store') }}" 
+                            <form action="{{ route('admin.vendor.additional-images.store') }}" 
                                 enctype="multipart/form-data" 
                                 class="dropzone" 
                                 id="image-upload">
                                 @csrf
-                                <input type="hidden" name="roomCode" value="{{ $data->room_code ?? null }}">
+                                <input type="hidden" name="vendorCode" value="{{ $data->vendor_code ?? null }}">
                             </form>
 
                             <a href="javascript:location.reload();" class="gallery_image_reload">
@@ -98,7 +98,7 @@
                                         @if (isset($files))
                                             @foreach ($files as $value)
                                                 @php
-                                                $filePath = asset('storage/assets/admin/images/room/' . $data->room_image);
+                                                $filePath = asset('storage/assets/admin/files/vendor/' . $value->file_name);
                                                 $ext = strtolower($value->file_type);
                                                 $isImage = in_array($ext, ['jpg','jpeg','png','gif','bmp']);
                                             @endphp
@@ -124,7 +124,7 @@
 
                                                 {{-- ✅ DELETE --}}
                                                 <td class="text-center">
-                                                    <form action="{{ route('admin.room.additional-images.destroy', $value->id) }}" 
+                                                    <form action="{{ route('admin.vendor.additional-images.destroy', $value->id) }}" 
                                                         method="POST"
                                                         onsubmit="return confirm('Are you sure you want to delete this file?')">
                                                         @csrf
