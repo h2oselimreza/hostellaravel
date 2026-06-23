@@ -54,7 +54,7 @@
                 <a
                     href="{{ $tab['route'] }}"
                     class="btn btn-{{ $tab['active'] ? 'success' : 'default' }} custom-button-group {{ isset($data->exists) ? '' : '' }} 
-                    {{ ($disabled) && $tab['title'] != 'Basic' ? 'disabled' : '' }}">
+                    {{ ($disabled) && $tab['title'] != 'General Info' ? 'disabled' : '' }}">
                     <i class="fa fa-list"></i>
                     <b>{{ $tab['title'] }}</b>
                 </a>

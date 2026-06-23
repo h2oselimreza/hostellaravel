@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
+<style>
+    .accordion-button {
+        padding: 15px 11px 15px 11px;
+    }
+    .bg-color {
+        border-radius: 0px;
+    }
+</style>
 <div class="header dashboard_from">
     <h1 class="page-title">Add Vendor</h1>
     <ul class="breadcrumb">
