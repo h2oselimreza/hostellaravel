@@ -97,6 +97,7 @@ use App\Http\Controllers\Admin\Workshop\WorkshopVehicleTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Vendor\VendorController;
+use App\Http\Controllers\Admin\Vendor\VendorImageController;
 use App\Http\Controllers\Admin\Workshop\ServiceController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BuildingController;
@@ -267,6 +268,7 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::resource('master-data/vendor', VendorController::class)->names('admin.master.data.vendor');
     Route::get('master-data/get-districts/{division_id}', [VendorController::class, 'getDistricts'])->name('admin.get.districts');
     Route::get('master-data/get-upazilas/{district_id}', [VendorController::class, 'getUpazilas'])->name('admin.get.upazilas');
+    Route::resource('master-data/vendor/image', VendorImageController::class)->names('admin.vendor.image');
 
 
 });

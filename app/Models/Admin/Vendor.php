@@ -8,6 +8,8 @@ class Vendor extends BaseModel
 {
     protected $table = 'vendor';
 
+    public const FILE_PATH = 'assets/admin/files/vendor';
+
 
     protected $fillable = [
         'vendor_code',

@@ -36,8 +36,8 @@
         ],
         [
             'title' => 'Images',
-            'route' => isset($data) ? route('admin.room.profile-picture.edit', $data->vendor_code) : '#',
-            'active' => request()->routeIs('admin.room.profile-picture.*'),
+            'route' => isset($data) ? route('admin.vendor.image.edit', $data->vendor_code) : '#',
+            'active' => request()->routeIs('admin.vendor.image.*'),
         ],
         [
             'title' => 'Attachment',
