@@ -265,6 +265,10 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
 
     /*===============Vendor routes==================*/
     Route::resource('master-data/vendor', VendorController::class)->names('admin.master.data.vendor');
+    Route::get('master-data/get-districts/{division_id}', [VendorController::class, 'getDistricts'])->name('admin.get.districts');
+    Route::get('master-data/get-upazilas/{district_id}', [VendorController::class, 'getUpazilas'])->name('admin.get.upazilas');
+
+
 });
 
 require __DIR__.'/auth.php';

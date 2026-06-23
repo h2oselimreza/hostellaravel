@@ -196,7 +196,6 @@ return [
     'BOOKING_REQ_FORWARD_PENDING_STATUS' => '8',
 
     'BOOKING_CODE' => 'BK',
-    'VENDOR_CODE'  => 'VNDR-',
 
     // ================= LICENSE =================
     'LICENSE_KEY' => env('APP_ENV') == 'production'
@@ -257,4 +256,6 @@ return [
 
     'ITEM_CTG_CODE' => "ITMCATG",
     'ITEM_HEAD_CODE' => "ITMHD",   
+
+    'VENDOR_CODE'  => 'VNDR',
 ];
