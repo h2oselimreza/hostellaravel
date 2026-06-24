@@ -72,7 +72,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a href="{{ $value ? route('admin.room.edit', $value->room_code) : '#' }}" 
+                                                    <a href="{{ $value ? route('admin.boarder-enrollment.new-boarder.personal.info.create', [$value->room_code, $value->seat_code]) : '#' }}" 
                                                     class="d-block ps-3">
                                                         <span class="ui-button-text">Enroll New Boarder</span>
                                                     </a>                                    

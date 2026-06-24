@@ -258,4 +258,5 @@ return [
     'ITEM_HEAD_CODE' => "ITMHD",   
 
     'VENDOR_CODE'  => 'VNDR',
+    'BOARDER_CODE' => "BE",
 ];

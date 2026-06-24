@@ -5,6 +5,11 @@ use App\Http\Controllers\Admin\AnniversaryOrBirthdayCardController;
 use App\Http\Controllers\Admin\Appointment\AppointmentController;
 use App\Http\Controllers\Admin\BlockController;
 use App\Http\Controllers\Admin\BlockRoadController;
+use App\Http\Controllers\Admin\Boarder\BoarderController;
+use App\Http\Controllers\Admin\Boarder\BoarderEducationController;
+use App\Http\Controllers\Admin\Boarder\BoarderPersonalInfoController;
+use App\Http\Controllers\Admin\Boarder\BoarderProfilePhotoController;
+use App\Http\Controllers\Admin\Boarder\BoarderWorkingExperienceController;
 use App\Http\Controllers\Admin\Building\BuildingAdditionalImagesController;
 use App\Http\Controllers\Admin\Building\BuildingController as BuildingBuildingController;
 use App\Http\Controllers\Admin\Building\BuildingProfilePictureController;
@@ -275,6 +280,34 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
 
     Route::get('boarder-enrollment/new-boarder', [NewBoarderController::class, 'index'])->name('admin.boarder-enrollment.new-boarder');
     Route::get('boarder-enrollment/new-boarder/seat-list/{room_code}', [NewBoarderController::class, 'seatList'])->name('admin.boarder-enrollment.new-boarder.seatList');
+
+    /*===============new border route==================*/
+    // Route::get('boarder-enrollment/new-boarder/personal-info/{roomCode}/{seatCode}',[BoarderPersonalInfoController::class, 'create'])->name('admin.boarder-enrollment.new-boarder.personal.info.create');    
+    // Route::post('boarder-enrollment/new-boarder/personal-info',[BoarderPersonalInfoController::class, 'store'])->name('admin.boarder-enrollment.new-boarder.personal.info.store');
+    // Route::get('boarder-enrollment/new-boarder/personal-info/{boarderId}',[BoarderPersonalInfoController::class, 'edit'])->name('admin.boarder-enrollment.new-boarder.personal.info.edit');    
+    // Route::put('boarder-enrollment/new-boarder/personal-info/{borderId}',[BoarderPersonalInfoController::class, 'update'])->name('admin.boarder-enrollment.new-boarder.personal.info.update');        
+    Route::prefix('boarder-enrollment/new-boarder/personal-info')
+    ->group(function () {
+        Route::get('create/{roomCode}/{seatCode}',[BoarderPersonalInfoController::class, 'create'])->name('admin.boarder-enrollment.new-boarder.personal.info.create');
+
+        Route::post('/',[BoarderPersonalInfoController::class, 'store'])->name('admin.boarder-enrollment.new-boarder.personal.info.store');
+
+        Route::get('{boarderId}/edit',[BoarderPersonalInfoController::class, 'edit'])->name('admin.boarder-enrollment.new-boarder.personal.info.edit');
+
+        Route::put('{boarderId}',[BoarderPersonalInfoController::class, 'update'])->name('admin.boarder-enrollment.new-boarder.personal.info.update');
+    });
+
+    Route::get('boarder-enrollment/new-boarder/boarder-education-info/{id}', [BoarderEducationController::class, 'edit'])->name('admin.boarder.education.edit');
+    Route::post('boarder-enrollment/new-boarder/boarder-education-info/{id}', [BoarderEducationController::class, 'update'])->name('admin.boarder.education.update');
+
+    Route::get('boarder-enrollment/new-boarder/working-experience-info/{id}', [BoarderWorkingExperienceController::class, 'edit'])->name('admin.boarder.working.experience.edit');
+    Route::post('boarder-enrollment/new-boarder/working-experience-info/{id}', [BoarderWorkingExperienceController::class, 'update'])->name('admin.boarder.working.experience.update');
+
+    Route::get('boarder-enrollment/new-boarder/profile-photo-info/{id}', [BoarderProfilePhotoController::class, 'edit'])->name('admin.boarder.profile.photo.edit');
+    Route::post('boarder-enrollment/new-boarder/profile-photo-info/{id}', [BoarderProfilePhotoController::class, 'update'])->name('admin.boarder.profile.photo.update');
+
+    /*===============border list route==================*/
+    Route::get('boarder-enrollment/boarder', [BoarderController::class, 'index'])->name('admin.boarder-enrollment.boarder');
 
 });
 
