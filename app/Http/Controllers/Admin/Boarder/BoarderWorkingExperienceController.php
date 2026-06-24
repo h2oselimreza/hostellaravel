@@ -19,7 +19,7 @@ class BoarderWorkingExperienceController extends Controller
     public function update(Request $request, $boarderId)
     {
         $workingExpCount = (int) $request->workingExpCount;
-        for ($i = 0; $i < $workingExpCount; $i++) {
+        for ($i = 1; $i < $workingExpCount; $i++) {
             $request->validate([
                 "fYear$i" => 'required',
                 "fMonth$i"=> 'required',
@@ -43,7 +43,7 @@ class BoarderWorkingExperienceController extends Controller
             }
             //dd($request->all());
             // 2️⃣ Loop through each working experience block
-            for ($i = 0; $i <= $workingExpCount; $i++) {
+            for ($i = 1; $i <= $workingExpCount; $i++) {
                 //dd($request->all(),$workingExpCount,'pp');
                 // Skip if no institution name (empty row)
                 if (!$request->has("institutionName{$i}") || empty($request->input("institutionName{$i}"))) {

@@ -4,7 +4,7 @@
 
 <div class="header dashboard_from">
     <h1 class="page-title">
-        {{ isset($data->exists) ? 'Edit Employee' : 'Add Employee' }}
+        {{ isset($data->exists) ? 'Edit Boarder' : 'Add Boarder' }}
     </h1>
 </div>
 
@@ -78,7 +78,7 @@
                                                 </div>
                                             @endif
 
-                                            @php $serial = 0; @endphp
+                                            @php $serial = 1; @endphp
 
                                             @foreach($workingDetails as $employeeWorkingDetail)
 
@@ -371,7 +371,7 @@
 
     });
     var counter = {{ count($workingDetails ?? []) }};
-    counter;
+    counter++;
 
     function addEduQualificationDiv() {
 
