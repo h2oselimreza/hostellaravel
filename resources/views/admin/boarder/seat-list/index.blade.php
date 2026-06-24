@@ -3,11 +3,12 @@
 @section('content')
 
 <div class="header dashboard_from">
-    <h1 class="page-title">Vendor</h1>
+    <h1 class="page-title">Seat List</h1>
     <ul class="breadcrumb">
         <li><a href="{{ url('admin/dashboard') }}">Home</a></li>
-        <li><a href="#">/ Master Data</a></li>
-        <li><a href="{{ url('admin/master-data/vendor') }}">/ Vendor</a></li>
+        <li><a href="#">/ Boarder Enrollment</a></li>
+        <li><a href="{{ url('admin/boarder-enrollment/new-boarder') }}">/ Room List</a></li>
+        <li><a href="{{ route('admin.boarder-enrollment.new-boarder.seatList',$roomCode) }}">/ Seat List</a></li>
     </ul>
 </div>
 <div class="main-content">
@@ -30,32 +31,40 @@
         <div class="col-sm-12 col-md-12">
 
             <div class="panel panel-default"> 
-                <div class="add-button">
-                    <a href="{{ route('admin.master.data.vendor.create') }}">Add Vendor</a>
-                </div>
+                {{-- <div class="add-button">
+                    <a href="{{ route('admin.room.create') }}">Add Room</a>
+                </div> --}}
                 <div class="table-responsive">
 
                     <table class="table table-bordered table-hover custom-table" id="datatable">
                         <thead>
                             <tr class="bg-primary">
                                 <th class="text-center">SL</th>
-                                <th class="text-center">Vendor Code</th>
-                                <th class="text-center">Vendor Title</th>
-                                <th class="text-center">Address</th>
-                                <th class="text-start">Contact</th>
-                                <th class="text-center">Status</th>
+                                <th class="text-center">Building</th>
+                                <th class="text-center">Floor</th>
+                                <th class="text-start">Room</th>
+                                <th class="text-start">Seat Code</th>
+                                <th class="text-start">Seat Title</th>
+                                <th class="text-start">Seat Type</th>
+                                <th class="text-start">Boarder Name</th>
+                                <th class="text-start">Allocated Date Time</th>
+                                <th class="text-start">Enrollment Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($data as $value)
+                            @forelse ($seats as $value)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $value->vendor_code }}</td>
+                                    <td class="text-center">{{ $value->building_title }}</td>
+                                    <td class="text-center">{{ $value->floor_title }}</td>
+                                    <td class="text-center">{{ $value->room_title }}</td>
+                                    <td class="text-center">{{ $value->seat_code }}</td>
                                     <td class="text-center">{{ $value->title }}</td>
-                                    <td class="text-center">{{ $value->address }}</td>
-                                    <td class="text-center">{{ $value->contact }}</td>
-                                    <td class="text-center">{{ ($value->is_active) ? 'Active':'Inactive' }}</td>
+                                    <td class="text-center">{{ $value->seat_type_title }}</td>
+                                    <td class="text-center">{{ $value->boarder_name ?? '--' }}</td>
+                                    <td class="td-center">{{ $value->allocated_dt_tm ? get_date_time_format($value->allocated_dt_tm) : '' }}</td>
+                                    <td class="td-center">{{ $value->boarder ? 'Booked' : 'Vacant' }}</td>
                                     <td class="text-center">
                                         <div class="dropdown">
                                             <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
@@ -63,9 +72,9 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a href="{{ $value ? route('admin.master.data.vendor.edit', $value->vendor_code) : '#' }}" 
+                                                    <a href="{{ $value ? route('admin.room.edit', $value->room_code) : '#' }}" 
                                                     class="d-block ps-3">
-                                                        <span class="ui-button-text">Update</span>
+                                                        <span class="ui-button-text">Enroll New Boarder</span>
                                                     </a>                                    
                                                 </li>
                                                 {{-- <li class="mt-2">
@@ -96,7 +105,11 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>   
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
 
@@ -131,7 +144,7 @@ $(document).ready(function () {
                 var column = this;
 
                 // ❌ Skip Action column (last column index = 7)
-                if (column.index() === 6) return;
+                if (column.index() === 10) return;
 
                 var select = $('<select class="form-control" style="width:100%"><option value="">All</option></select>')
                     .appendTo($(column.footer()).empty())

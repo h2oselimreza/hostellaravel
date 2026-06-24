@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="header dashboard_from">
-    <h1 class="page-title">Vendor</h1>
+    <h1 class="page-title">Room List</h1>
     <ul class="breadcrumb">
         <li><a href="{{ url('admin/dashboard') }}">Home</a></li>
-        <li><a href="#">/ Master Data</a></li>
-        <li><a href="{{ url('admin/master-data/vendor') }}">/ Vendor</a></li>
+        <li><a href="#">/ Boarder Enrollment</a></li>
+        <li><a href="{{ url('admin/boarder-enrollment/new-boarder') }}">/ Room List</a></li>
     </ul>
 </div>
 <div class="main-content">
@@ -30,19 +30,22 @@
         <div class="col-sm-12 col-md-12">
 
             <div class="panel panel-default"> 
-                <div class="add-button">
-                    <a href="{{ route('admin.master.data.vendor.create') }}">Add Vendor</a>
-                </div>
+                {{-- <div class="add-button">
+                    <a href="{{ route('admin.room.create') }}">Add Room</a>
+                </div> --}}
                 <div class="table-responsive">
 
                     <table class="table table-bordered table-hover custom-table" id="datatable">
                         <thead>
                             <tr class="bg-primary">
                                 <th class="text-center">SL</th>
-                                <th class="text-center">Vendor Code</th>
-                                <th class="text-center">Vendor Title</th>
-                                <th class="text-center">Address</th>
-                                <th class="text-start">Contact</th>
+                                <th class="text-center">Building</th>
+                                <th class="text-center">Floor</th>
+                                <th class="text-center">Room Code</th>
+                                <th class="text-start">Room Title</th>
+                                <th class="text-start">Total Seats</th>
+                                <th class="text-start">Booked</th>
+                                <th class="text-start">Vacant</th>
                                 <th class="text-center">Status</th>
                                 <th>Action</th>
                             </tr>
@@ -51,10 +54,13 @@
                             @forelse ($data as $value)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $value->vendor_code }}</td>
+                                    <td class="text-center">{{ $value->building_title }}</td>
+                                    <td class="text-center">{{ $value->floor_title }}</td>
+                                    <td class="text-center">{{ $value->room_code }}</td>
                                     <td class="text-center">{{ $value->title }}</td>
-                                    <td class="text-center">{{ $value->address }}</td>
-                                    <td class="text-center">{{ $value->contact }}</td>
+                                    <td class="text-center">{{ $value->total_seat_count }}</td>
+                                    <td class="text-center">{{ $value->allocated_seat_count }}</td>
+                                    <td class="text-center">{{ $value->total_seat_count - $value->allocated_seat_count }}</td>
                                     <td class="text-center">{{ ($value->is_active) ? 'Active':'Inactive' }}</td>
                                     <td class="text-center">
                                         <div class="dropdown">
@@ -63,9 +69,9 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a href="{{ $value ? route('admin.master.data.vendor.edit', $value->vendor_code) : '#' }}" 
+                                                    <a href="{{ $value ? route('admin.boarder-enrollment.new-boarder.seatList', $value->room_code) : '#' }}" 
                                                     class="d-block ps-3">
-                                                        <span class="ui-button-text">Update</span>
+                                                        <span class="ui-button-text">Seat List</span>
                                                     </a>                                    
                                                 </li>
                                                 {{-- <li class="mt-2">
@@ -96,7 +102,10 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th></th>   
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
 
@@ -131,7 +140,7 @@ $(document).ready(function () {
                 var column = this;
 
                 // ❌ Skip Action column (last column index = 7)
-                if (column.index() === 6) return;
+                if (column.index() === 9) return;
 
                 var select = $('<select class="form-control" style="width:100%"><option value="">All</option></select>')
                     .appendTo($(column.footer()).empty())

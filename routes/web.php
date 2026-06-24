@@ -71,6 +71,7 @@ use App\Http\Controllers\Admin\MasterData\Income\IncomeHeadController;
 use App\Http\Controllers\Admin\MasterData\Vehicle\VehicleController;
 use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\ModuleGroupController;
+use App\Http\Controllers\Admin\NewBoarderController;
 use App\Http\Controllers\Admin\Place\PlaceAttachmentController;
 use App\Http\Controllers\Admin\Place\PlaceController;
 use App\Http\Controllers\Admin\Place\PlaceImageController;
@@ -272,6 +273,8 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::resource('master-data/vendor/image', VendorImageController::class)->names('admin.vendor.image');
     Route::resource('master-data/vendor/additional-images', VendorAdditionalImageController::class)->names('admin.vendor.additional-images');
 
+    Route::get('boarder-enrollment/new-boarder', [NewBoarderController::class, 'index'])->name('admin.boarder-enrollment.new-boarder');
+    Route::get('boarder-enrollment/new-boarder/seat-list/{room_code}', [NewBoarderController::class, 'seatList'])->name('admin.boarder-enrollment.new-boarder.seatList');
 
 });
 
