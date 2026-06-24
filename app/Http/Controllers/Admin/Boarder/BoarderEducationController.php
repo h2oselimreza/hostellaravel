@@ -67,15 +67,30 @@ class BoarderEducationController extends Controller
         return redirect()->back()->with('error','All Field are empty');
        }
         for ($i = 0; $i < $totalRows; $i++) {
-            $request->validate([
-                "levelOfEducation$i" => 'required',
-                "examDegree$i" => 'required',
-                "duration$i" => 'required',
-            ],[
-                "levelOfEducation$i.required" => "Level of education is required in row ".($i+1),
-                "examDegree$i.required" => "Exam/Degree is required in row ".($i+1),
-                "duration$i.required" => "Duration is required in row ".($i+1),
-            ]);
+            
+            $level = $request->input("levelOfEducation{$i}");
+
+            // deleted row
+            if (
+                !$request->has("hiddenEducationRow{$i}") &&
+                empty($level)
+            ) {
+                continue;
+            }
+
+            if (!empty($level)) {
+
+                $request->validate([
+                    "levelOfEducation$i" => 'required',
+                    "examDegree$i" => 'required',
+                    "duration$i" => 'required',
+                ],[
+                    "levelOfEducation$i.required" => "Level of education is required in row ".($i+1),
+                    "examDegree$i.required" => "Exam/Degree is required in row ".($i+1),
+                    "duration$i.required" => "Duration is required in row ".($i+1),
+                ]);
+
+            }
        }
         // Collect deleted row IDs
         $deleteIds = explode(',', $request->input('deleteEduRow', ''));

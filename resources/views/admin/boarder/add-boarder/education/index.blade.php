@@ -41,14 +41,14 @@
                 <div class="panel-heading">
                   <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12">
-                      <h4 class="panel-title">
+                      <h4 class="panel-title py-3 px-2">
                         <i class="fa fa-book"></i> Educational Information
                       </h4>
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12 text-right">
-                      <h4 class="panel-title">
+                      {{-- <h4 class="panel-title">
                         <i class="fa fa-user"></i> <?php /*echo $employeeId*/ ?>
-                      </h4>
+                      </h4> --}}
                     </div>
                   </div>
                 </div>
