@@ -33,4 +33,8 @@
         <a class="nav-link {{ isset($data->exists) ? '' : 'nav_item' }}
             <?= $secondLastSegment == 'profile-photo-info' ? 'active' : ''?>" href="{{ isset($data->exists) ? route('admin.boarder.profile.photo.edit', $data->boarder_id) : '#' }}"> Photograph </a>
     </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link {{ isset($data->exists) ? '' : 'nav_item' }}
+            <?= $secondLastSegment == 'boarder-attachment' ? 'active' : ''?>" href="{{ isset($data->exists) ? route('admin.boarder.boarder.attachment.edit', $data->boarder_id) : '#' }}"> Attachment </a>
+    </li>
 </ul>

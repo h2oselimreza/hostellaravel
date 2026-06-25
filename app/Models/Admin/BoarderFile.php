@@ -9,6 +9,8 @@ class BoarderFile extends BaseModel
 {
     protected $table = 'boarder_file';
 
+    public const FILE_PATH = 'assets/admin/files/boarder';
+
     protected $fillable = [
         'boarder',
         'original_name',

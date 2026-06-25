@@ -22,7 +22,7 @@
         <li><a href="{{ url('admin/dashboard') }}">Home</a></li>
         <li><a href="#">/ Master Data</a> / </li>
         <li><a href="{{ url('admin/master-data/seat') }}">Seat</a></li>
-        <li><a href="{{ route('admin.seat.additional.image.edit',[$data->seat_code]) }}">/ Update Seat</a></li>
+        <li><a href="{{ route('admin.seat.additional.image.edit',[$data->boarder_id]) }}">/ Update Seat</a></li>
     </ul>
 </div>
 
@@ -34,7 +34,7 @@
     <div class="card shadow">
         <div class="card-body">
             <!-- Nav Tabs -->
-            @include('admin.seat.tab')
+            @include('admin.boarder.add-boarder.tab')
             {{-- Success Message --}}
             @if(session('success'))
                 <div class="alert alert-success">
@@ -65,12 +65,12 @@
                     <div class="row">
                         <div class="col-md-12">
                             {{-- Dropzone Upload Form --}}
-                            <form action="{{ route('admin.seat.additional.image.store') }}" 
+                            <form action="{{ route('admin.boarder.boarder.attachment.store') }}" 
                                 enctype="multipart/form-data" 
                                 class="dropzone" 
                                 id="image-upload">
                                 @csrf
-                                <input type="hidden" name="seatCode" value="{{ $data->seat_code ?? null }}">
+                                <input type="hidden" name="boarderId" value="{{ $data->boarder_id ?? null }}">
                             </form>
 
                             <a href="javascript:location.reload();" class="gallery_image_reload">
@@ -98,7 +98,7 @@
                                         @if (isset($files))
                                             @foreach ($files as $value)
                                                 @php
-                                                $filePath = asset('storage/assets/admin/images/seat/' . $value->seat_image);
+                                                $filePath = asset('storage/assets/admin/files/boarder/' . $value->file_name);
                                                 $ext = strtolower($value->file_type);
                                                 $isImage = in_array($ext, ['jpg','jpeg','png','gif','bmp']);
                                             @endphp
@@ -124,7 +124,7 @@
 
                                                 {{-- ✅ DELETE --}}
                                                 <td class="text-center">
-                                                    <form action="{{ route('admin.seat.additional.image.destroy', $value->id) }}" 
+                                                    <form action="{{ route('admin.boarder.boarder.attachment-destroy', $value->id) }}" 
                                                         method="POST"
                                                         onsubmit="return confirm('Are you sure you want to delete this file?')">
                                                         @csrf

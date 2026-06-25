@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AnniversaryOrBirthdayCardController;
 use App\Http\Controllers\Admin\Appointment\AppointmentController;
 use App\Http\Controllers\Admin\BlockController;
 use App\Http\Controllers\Admin\BlockRoadController;
+use App\Http\Controllers\Admin\Boarder\BoarderAttachmentController;
 use App\Http\Controllers\Admin\Boarder\BoarderController;
 use App\Http\Controllers\Admin\Boarder\BoarderEducationController;
 use App\Http\Controllers\Admin\Boarder\BoarderPersonalInfoController;
@@ -301,6 +302,10 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
 
     Route::get('boarder-enrollment/new-boarder/profile-photo-info/{id}', [BoarderProfilePhotoController::class, 'edit'])->name('admin.boarder.profile.photo.edit');
     Route::post('boarder-enrollment/new-boarder/profile-photo-info/{id}', [BoarderProfilePhotoController::class, 'update'])->name('admin.boarder.profile.photo.update');
+
+    Route::get('boarder-enrollment/new-boarder/boarder-attachment/{id}', [BoarderAttachmentController::class, 'edit'])->name('admin.boarder.boarder.attachment.edit');
+    Route::post('boarder-enrollment/new-boarder/boarder-attachment', [BoarderAttachmentController::class, 'store'])->name('admin.boarder.boarder.attachment.store');
+    Route::delete('boarder-enrollment/new-boarder/attachment-destroy/{id}', [BoarderAttachmentController::class, 'destroy'])->name('admin.boarder.boarder.attachment-destroy');
 
     /*===============border list route==================*/
     Route::get('boarder-enrollment/boarder', [BoarderController::class, 'index'])->name('admin.boarder-enrollment.boarder');
