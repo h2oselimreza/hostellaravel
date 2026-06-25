@@ -105,7 +105,6 @@ return [
     'HOMESERVICE_NO' => 'HMAP',
 
     // ================= EXPENSE =================
-    'EXPENSE_NO' => 'EXP-',
     'INDIVIDUAL_EXP' => '999',
 
     'EXP_TYPE_GENERAL' => 'general',
@@ -267,4 +266,6 @@ return [
     //--------- admission fee code ----------//
     'ADMISSION_FEE_HEAD_CODE' => 'ITMHD00007',
     'ADMISSION_FEE_INV_TITLE' => "Admission Fee",
+
+    'EXPENSE_NO' => 'EXP',
 ];

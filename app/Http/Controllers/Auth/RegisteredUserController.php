@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Repositories\OtpRepository;
 use App\Repositories\RegisterRepository;
 use App\Repositories\SMSAndNotificationRepository;
-use App\Services\Client\GenerateMonthlyToken;
+use App\Services\GenerateMonthlyToken as ServicesGenerateMonthlyToken;
 use App\Services\SmsService;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
@@ -226,7 +226,7 @@ class RegisteredUserController extends Controller
     public function createNewRegistration(
         Request $request, 
         OtpRepository $otpRepository,
-        GenerateMonthlyToken $generateMonthlyToken,
+        ServicesGenerateMonthlyToken $generateMonthlyToken,
         RegisterRepository $registrationRepository
         )
     {

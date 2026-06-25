@@ -30,6 +30,7 @@ use App\Http\Controllers\Admin\EmployeeAnniversaryOrBirthdayCardController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\EmployeeEducationController;
 use App\Http\Controllers\Admin\EmployeeOfficeController;
+use App\Http\Controllers\Admin\Expense\ExpenseController;
 use App\Http\Controllers\Admin\Floor\FloorAdditionalImageController;
 use App\Http\Controllers\Admin\Floor\FloorController;
 use App\Http\Controllers\Admin\Floor\FloorImageController;
@@ -316,6 +317,10 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::delete('boarder-enrollment/status-change', [BoarderController::class, 'boarderStatusChange'])->name('admin.boarder-enrollment.status-change');
     Route::delete('boarder-enrollment/vacant-seat',[BoarderController::class, 'vacantSeat'])->name('admin.boarder-enrollment.vacant-seat');
     Route::delete('boarder-enrollment/transfer-seat',[BoarderController::class, 'transferSeat'])->name('admin.boarder-enrollment.transfer-seat');
+
+    /*===============border list route==================*/
+    Route::resource('expense', ExpenseController::class)->names('admin.expense');
+
 });
 
 require __DIR__.'/auth.php';
