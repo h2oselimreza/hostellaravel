@@ -263,4 +263,8 @@ return [
     'LOG_TYPE_VACANT' => 'vacant',
     'LOG_TYPE_BOARDER_INACTIVE' => 'boarder_inactive',
     'LOG_TYPE_TRANSFER' => 'transfer',
+
+    //--------- admission fee code ----------//
+    'ADMISSION_FEE_HEAD_CODE' => 'ITMHD00007',
+    'ADMISSION_FEE_INV_TITLE' => "Admission Fee",
 ];

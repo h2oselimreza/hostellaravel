@@ -235,4 +235,32 @@ class CommonRepository
         return $query->get();
     }
 
+    public function getItemHead($isActiveFlag = 1)
+    {
+        $query = DB::table('item_heads')
+            ->select(
+                'item_heads.*',
+                'item_categories.parent_category_str',
+                'item_categories.category_name'
+            )
+            ->join(
+                'item_categories',
+                'item_categories.category_code',
+                '=',
+                'item_heads.item_category'
+            )
+            ->where('item_categories.is_active', 1);
+
+        if ($isActiveFlag == 1) {
+            $query->where('item_heads.is_active', 1);
+        } elseif ($isActiveFlag == 2) {
+            $query->where('item_heads.is_active', 0);
+        }
+
+        return $query
+            ->orderBy('item_categories.category_name', 'asc')
+            ->get()
+            ->toArray();
+    }
+
 }

@@ -253,4 +253,152 @@ class BoarderRepository
             ->where('hst_seat.is_active', 1)
             ->get();
     }
+
+    public function getBoarderPersonalInfo(
+        $boarderId = null, 
+        $boarderIdArr = array(), 
+        $flag = null
+    ) {
+        $query = DB::table('boarder')
+            ->select([
+                'boarder.*',
+
+                'occupation_father_tb.element as father_occupation_name',
+                'occupation_mother_tb.element as mother_occupation_name',
+                'occupation_spouse_tb.element as spouse_occupation_name',
+
+                'emer_con_rel_tb.element as emer_contact_relation_name',
+
+                'guardian_rel_tb.element_code as guardian_relation_name',
+
+                'designation_tb.element as designation_name',
+            ])
+
+            ->leftJoin(
+                'common_table as occupation_father_tb',
+                'occupation_father_tb.element_code',
+                '=',
+                'boarder.father_occupation'
+            )
+
+            ->leftJoin(
+                'common_table as occupation_mother_tb',
+                'occupation_mother_tb.element_code',
+                '=',
+                'boarder.mother_occupation'
+            )
+
+            ->leftJoin(
+                'common_table as occupation_spouse_tb',
+                'occupation_spouse_tb.element_code',
+                '=',
+                'boarder.spouse_occupation'
+            )
+
+            ->leftJoin(
+                'common_table as emer_con_rel_tb',
+                'emer_con_rel_tb.element_code',
+                '=',
+                'boarder.emer_contact_relation'
+            )
+
+            ->leftJoin(
+                'common_table as guardian_rel_tb',
+                'guardian_rel_tb.element_code',
+                '=',
+                'boarder.guardian_relation'
+            )
+
+            ->leftJoin(
+                'common_table as designation_tb',
+                'designation_tb.element_code',
+                '=',
+                'boarder.designation'
+            )
+
+            ->leftJoin(
+                'users',
+                'users.user_id',
+                '=',
+                'boarder.boarder_id'
+            )
+
+            ->leftJoin(
+                'user_group',
+                'user_group.id',
+                '=',
+                'users.user_group'
+            );
+
+        if (is_null($flag)) {
+            $query->where('boarder.is_active', 1);
+        }
+
+        if ($boarderId) {
+            $query->where('boarder.boarder_id', $boarderId);
+        } elseif (!empty($boarderIdArr)) {
+            $query->whereIn('boarder.boarder_id', $boarderIdArr);
+        }
+
+        return $query->get()->toArray();
+    }
+
+    public function getInvoiceTemplate($boarderId)
+    {
+        return DB::table('boarder_invoice_template')
+            ->select(
+                'boarder_invoice_template.*',
+                'item_heads.item_head as item_head_name'
+            )
+            ->join(
+                'item_heads',
+                'item_heads.item_head_code',
+                '=',
+                'boarder_invoice_template.item_head'
+            )
+            ->where('boarder', $boarderId)
+            ->get()
+            ->toArray();
+    }
+
+    public function getAdmissionHead($headCode)
+    {
+        return DB::table('item_heads')
+            ->select(
+                'item_heads.*',
+                'item_categories.parent_category_str',
+                'item_categories.category_name'
+            )
+            ->join(
+                'item_categories',
+                'item_categories.category_code',
+                '=',
+                'item_heads.item_category'
+            )
+            ->where('item_heads.item_head_code', $headCode)
+            ->get()
+            ->toArray();
+    }
+
+    public function getAdmissionFee($boarderId)
+    {
+        return DB::table('invoice_summary')
+            ->select('invoice_summary.*')
+            ->join(
+                'invoice_detail',
+                'invoice_detail.invoice_no',
+                '=',
+                'invoice_summary.invoice_no'
+            )
+            ->join(
+                'item_heads',
+                'item_heads.item_head_code',
+                '=',
+                'invoice_detail.item_head'
+            )
+            ->where('invoice_detail.item_head', config('constants.ADMISSION_FEE_HEAD_CODE'))
+            ->where('invoice_summary.boarder', $boarderId)
+            ->where('invoice_summary.is_admission_invoice', 1)
+            ->first();
+    }
 }

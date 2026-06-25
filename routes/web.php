@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BlockRoadController;
 use App\Http\Controllers\Admin\Boarder\BoarderAttachmentController;
 use App\Http\Controllers\Admin\Boarder\BoarderController;
 use App\Http\Controllers\Admin\Boarder\BoarderEducationController;
+use App\Http\Controllers\Admin\Boarder\BoarderInvoiceController;
 use App\Http\Controllers\Admin\Boarder\BoarderPersonalInfoController;
 use App\Http\Controllers\Admin\Boarder\BoarderProfilePhotoController;
 use App\Http\Controllers\Admin\Boarder\BoarderWorkingExperienceController;
@@ -296,6 +297,9 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
 
     Route::get('boarder-enrollment/new-boarder/boarder-education-info/{id}', [BoarderEducationController::class, 'edit'])->name('admin.boarder.education.edit');
     Route::post('boarder-enrollment/new-boarder/boarder-education-info/{id}', [BoarderEducationController::class, 'update'])->name('admin.boarder.education.update');
+
+    Route::get('boarder-enrollment/new-boarder/invoice-info/{id}', [BoarderInvoiceController::class, 'edit'])->name('admin.boarder.invoice.edit');
+    Route::post('boarder-enrollment/new-boarder/invoice-info/{id}', [BoarderInvoiceController::class, 'update'])->name('admin.boarder.invoice.update');
 
     Route::get('boarder-enrollment/new-boarder/working-experience-info/{id}', [BoarderWorkingExperienceController::class, 'edit'])->name('admin.boarder.working.experience.edit');
     Route::post('boarder-enrollment/new-boarder/working-experience-info/{id}', [BoarderWorkingExperienceController::class, 'update'])->name('admin.boarder.working.experience.update');

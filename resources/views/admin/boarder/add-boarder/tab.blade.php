@@ -13,13 +13,23 @@
         </li>
     @else
         <li class="nav-item" role="presentation">
-            <a class="nav-link {{ isset($data->exists) ? '' : 'nav_item' }}
-                        <?= $thirdLastSegment == 'create' ? 'active' : ''?>" href="{{ route('admin.boarder-enrollment.new-boarder.personal.info.create',[request()->route('roomCode'), request()->route('seatCode')]) }}" id="personal-tab" role="tab"> Personal </a>
+           <a class="nav-link {{ isset($data->exists) ? '' : 'nav_item' }}
+                {{ $thirdLastSegment == 'create' ? 'active' : '' }}"
+            href="{{ request()->route('roomCode') && request()->route('seatCode')
+                    ? route('admin.boarder-enrollment.new-boarder.personal.info.create', [
+                        'roomCode' => request()->route('roomCode'),
+                        'seatCode' => request()->route('seatCode')
+                    ])
+                    : '#' }}"
+            id="personal-tab"
+            role="tab">
+                Personal
+            </a>
         </li>
     @endif
     <li class="nav-item" role="presentation">
         <a class="nav-link {{ isset($data->exists) ? '' : 'nav_item' }}
-                    <?= $secondLastSegment == 'employee-office-info' ? 'active' : ''?>" href="{{ isset($data->exists) ? route('admin.employee.office.edit', $data->id) : '#' }}"> Official </a>
+                    <?= $secondLastSegment == 'invoice-info' ? 'active' : ''?>" href="{{ isset($data->exists) ? route('admin.boarder.invoice.edit', $data->boarder_id) : '#' }}">  Invoice </a>
     </li>
     <li class="nav-item" role="presentation">
     <a class="nav-link {{ isset($data->exists) ? '' : 'nav_item' }}
