@@ -259,4 +259,8 @@ return [
 
     'VENDOR_CODE'  => 'VNDR',
     'BOARDER_CODE' => "BE",
+
+    'LOG_TYPE_VACANT' => 'vacant',
+    'LOG_TYPE_BOARDER_INACTIVE' => 'boarder_inactive',
+    'LOG_TYPE_TRANSFER' => 'transfer',
 ];

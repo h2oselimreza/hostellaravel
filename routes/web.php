@@ -282,10 +282,6 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::get('boarder-enrollment/new-boarder/seat-list/{room_code}', [NewBoarderController::class, 'seatList'])->name('admin.boarder-enrollment.new-boarder.seatList');
 
     /*===============new border route==================*/
-    // Route::get('boarder-enrollment/new-boarder/personal-info/{roomCode}/{seatCode}',[BoarderPersonalInfoController::class, 'create'])->name('admin.boarder-enrollment.new-boarder.personal.info.create');    
-    // Route::post('boarder-enrollment/new-boarder/personal-info',[BoarderPersonalInfoController::class, 'store'])->name('admin.boarder-enrollment.new-boarder.personal.info.store');
-    // Route::get('boarder-enrollment/new-boarder/personal-info/{boarderId}',[BoarderPersonalInfoController::class, 'edit'])->name('admin.boarder-enrollment.new-boarder.personal.info.edit');    
-    // Route::put('boarder-enrollment/new-boarder/personal-info/{borderId}',[BoarderPersonalInfoController::class, 'update'])->name('admin.boarder-enrollment.new-boarder.personal.info.update');        
     Route::prefix('boarder-enrollment/new-boarder/personal-info')
     ->group(function () {
         Route::get('create/{roomCode}/{seatCode}',[BoarderPersonalInfoController::class, 'create'])->name('admin.boarder-enrollment.new-boarder.personal.info.create');
@@ -308,7 +304,9 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
 
     /*===============border list route==================*/
     Route::get('boarder-enrollment/boarder', [BoarderController::class, 'index'])->name('admin.boarder-enrollment.boarder');
-
+    Route::delete('boarder-enrollment/status-change', [BoarderController::class, 'boarderStatusChange'])->name('admin.boarder-enrollment.status-change');
+    Route::delete('boarder-enrollment/vacant-seat',[BoarderController::class, 'vacantSeat'])->name('admin.boarder-enrollment.vacant-seat');
+    Route::delete('boarder-enrollment/transfer-seat',[BoarderController::class, 'transferSeat'])->name('admin.boarder-enrollment.transfer-seat');
 });
 
 require __DIR__.'/auth.php';

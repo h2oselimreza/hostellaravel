@@ -88,46 +88,50 @@
                                     </td>
 
                                     <td class="td-center">
-                                        <div class="btn-group">
-                                            <button
-                                                type="button"
-                                                class="btn btn-default btn-xs dropdown-toggle"
-                                                data-toggle="dropdown"
-                                                aria-haspopup="true"
-                                                aria-expanded="false">
-                                                Action <span class="caret"></span>
-                                            </button>
+                                        <div class="dropdown">
+                                        <button
+                                            class="btn btn-secondary btn-sm dropdown-toggle"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            Action
+                                        </button>
 
-                                            <ul class="dropdown-menu pull-right">
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <a class="dropdown-item"
+                                                href="{{ route('admin.boarder-enrollment.new-boarder.personal.info.edit', $boarder->boarder_id) }}">
+                                                    Update
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a class="dropdown-item"
+                                                href="#"
+                                                onclick="vacant('{{ $boarder->boarder_id }}')">
+                                                    Vacant
+                                                </a>
+                                            </li>
+
+                                            @if($boarder->is_active == 1)
                                                 <li>
-                                                    <a href="{{ route('admin.boarder-enrollment.edit', ['boarderId' => $boarder->boarder_id]) }}">
-                                                        Update
+                                                    <a class="dropdown-item"
+                                                    href="#"
+                                                    onclick="statusChange('{{ $boarder->boarder_id }}', '2')">
+                                                        Inactive
                                                     </a>
                                                 </li>
+                                            @endif
 
-                                                <li>
-                                                    <a href="#" onclick="vacant('{{ $boarder->boarder_id }}')">
-                                                        Vacant
-                                                    </a>
-                                                </li>
-
-                                                @if($boarder->is_active == 1)
-                                                    <li>
-                                                        <a href="#"
-                                                        onclick="statusChange('{{ $boarder->boarder_id }}', '2')">
-                                                            Inactive
-                                                        </a>
-                                                    </li>
-                                                @endif
-
-                                                <li>
-                                                    <a href="#"
-                                                    onclick="showSeatModal('{{ $boarder->boarder_id }}')">
-                                                        Transfer
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                            <li>
+                                                <a class="dropdown-item"
+                                                href="#"
+                                                onclick="showSeatModal('{{ $boarder->boarder_id }}')">
+                                                    Transfer
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -309,70 +313,229 @@
             });
         }
     });
-    // $('#datatable').DataTable({
-    //     processing: true,
-    //     serverSide: true,
-    //     // ajax: "{{ route('admin.employee.data.index') }}",
-    //     // columns: [
-    //     //     {data: 'id', name: 'id', orderable:true, searchable:true, className: 'text-center'},
-    //     //     {data: 'employee_id', name: 'employee_id', orderable:true, searchable:true, className: 'text-center'},
-    //     //     {data: 'employee_name', name: 'employee_name', orderable:true, searchable:true, className: 'text-center'},
-    //     //     {data: 'designation', name: 'designation', orderable:false, searchable:false, className: 'text-center'},
-    //     //     {data: 'primary_mobile', name: 'primary_mobile', orderable:false, searchable:false, className: 'text-center'},
-    //     //     {data: 'group_name', name: 'group_name', orderable:false, searchable:false, className: 'text-center'},
-    //     //     {data: 'is_reset', name: 'is_reset', orderable:false, searchable:false, className: 'text-center'},
-    //     //     {data: 'status', name: 'status', orderable:false, searchable:false, className: 'text-center'},
-    //     //     {data: 'action', name: 'action', orderable:false, searchable:false, className: 'text-center'},
-    //     // ],
-    //     columnDefs: [
-    //         {
-    //             defaultContent: "-",
-    //             targets: "_all"
-    //         }
-    //     ],
+});    
+</script>
+<script>
+    function vacant(boarderId) {
 
-    //     // ✅ moved here (DO NOT create second DataTable)
-    //     initComplete: function () {
-    //         this.api().columns().every(function () {
-    //             var column = this;
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, vacant this seat!',
+            cancelButtonText: 'Cancel',
+            confirmButtonColor: '#ec6c62',
+            reverseButtons: true
+        }).then((result) => {
 
-    //             // ❌ Skip Action column (last column index = 7)
-    //             if (column.index() === 12) return;
+            if (result.isConfirmed) {
 
-    //             var select = $('<select class="form-control" style="width:100%"><option value="">All</option></select>')
-    //                 .appendTo($(column.footer()).empty())
-    //                 .on('change', function () {
-    //                     var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                showLoader();
 
-    //                     column
-    //                         .search(val ? '^' + val + '$' : '', true, false)
-    //                         .draw();
-    //                 });
+                $.ajax({
+                    url: "{{ route('admin.boarder-enrollment.vacant-seat') }}",
+                    type: "DELETE",
+                    data: {
+                        boarderId: boarderId,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (response) {
 
-    //             column.data().unique().sort().each(function (d) {
+                        hideLoader();
 
-    //                 // ✅ Convert HTML → plain text
-    //                 var text = $('<div>').html(d).text().trim();
+                        if (response.code == 1) {
 
-    //                 if (text) {
-    //                     select.append('<option value="' + text + '">' + text + '</option>');
-    //                 }
-    //             });
-    //         });
-    //     }
-    // });
+                            Swal.fire({
+                                title: 'Vacant Successfully',
+                                text: 'This seat is vacant now',
+                                icon: 'success',
+                                confirmButtonColor: '#228B22'
+                            }).then(() => {
 
-});
+                                window.location.href =
+                                    "{{ route('admin.boarder-enrollment.boarder') }}";
+                            });
 
-function deleteRecord(url)
-    {
-        if(confirm('Are you sure you want to delete this record?'))
-        {
-            let form = document.getElementById('delete-form');
-            form.action = url;
-            form.submit();
-        }
+                        } else if (response.code == 2) {
+
+                            window.location.href =
+                                "{{ route('admin.boarder-enrollment.boarder') }}";
+                        }
+                    },
+                    error: function () {
+
+                        hideLoader();
+
+                        Swal.fire(
+                            'Oops',
+                            "We couldn't connect to the server!",
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
     }
-    
+
+    function statusChange(boarderId, status) {
+
+        let buttonText = '';
+        let title = '';
+        let text = '';
+
+        if (status === '2') {
+            buttonText = 'Yes, inactive this boarder!';
+            title = 'Inactive Successfully!';
+            text = 'This boarder is inactive now!';
+        }
+
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ec6c62',
+            confirmButtonText: buttonText,
+            reverseButtons: true
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+                showLoader();
+
+                $.ajax({
+                    url: "{{ route('admin.boarder-enrollment.status-change') }}",
+                    type: "DELETE",
+                    data: {
+                        boarderId: boarderId,
+                        status: status,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+
+                        hideLoader();
+
+                        if (response.success) {
+
+                            Swal.fire({
+                                title: title,
+                                text: text,
+                                icon: 'success',
+                                confirmButtonColor: '#228B22'
+                            }).then(() => {
+
+                                window.location.href =
+                                    "{{ route('admin.boarder-enrollment.boarder') }}";
+                            });
+                        }
+                    },
+                    error: function() {
+
+                        hideLoader();
+
+                        Swal.fire(
+                            'Oops',
+                            "We couldn't connect to the server!",
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
+
+    function showSeatModal(boarderId) {
+        $('#transferBoarderId').val(boarderId);
+
+        const modal = new bootstrap.Modal(
+            document.getElementById('seatModal')
+        );
+
+        modal.show();
+    }
+
+    function transferSeat(serial) {
+
+    let seatCode = $('#seatCodeHidden' + serial).val();
+    let boarderId = $('#transferBoarderId').val();
+
+    $('#seatModalCloseBtn').click();
+
+    Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, transfer to this seat!',
+        cancelButtonText: 'Cancel',
+        confirmButtonColor: '#ec6c62',
+        reverseButtons: true
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            showLoader();
+
+            $.ajax({
+                url: "{{ route('admin.boarder-enrollment.transfer-seat') }}",
+                type: "DELETE",
+                data: {
+                    boarderId: boarderId,
+                    seatCode: seatCode,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (response) {
+
+                    hideLoader();
+                    console.log(response);
+                    if (response.code == 1) {
+
+                        Swal.fire({
+                            title: 'Transfer Successfully',
+                            text: 'This boarder is transferred now',
+                            icon: 'success',
+                            confirmButtonColor: '#228B22'
+                        }).then(() => {
+                            window.location.href =
+                                "{{ route('admin.boarder-enrollment.boarder') }}";
+                        });
+
+                    } else if (response.code == 2) {
+
+                        Swal.fire({
+                            title: 'Transfer Failed',
+                            text: 'This seat has already been booked',
+                            icon: 'warning',
+                            confirmButtonColor: '#f0ad4e'
+                        }).then(() => {
+                            window.location.href =
+                                "{{ route('admin.boarder-enrollment.boarder') }}";
+                        });
+
+                    } else if (response.code == 3) {
+
+                        Swal.fire({
+                            title: 'Transfer Failed',
+                            text: 'Boarder seat allocation not found.',
+                            icon: 'warning',
+                            confirmButtonColor: '#f0ad4e'
+                        }).then(() => {
+                            window.location.href =
+                                "{{ route('admin.boarder-enrollment.boarder') }}";
+                        });
+                    }
+                },
+                error: function (xhr) {
+
+                    hideLoader();
+
+                    Swal.fire(
+                        'Oops',
+                        "We couldn't connect to the server!",
+                        'error'
+                    );
+                }
+            });
+        }
+    });
+}
 </script>
 @endpush
