@@ -5,9 +5,11 @@ namespace App\Models\Admin;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 
-class BoarderInvoiceTemplate extends BaseModel
+class BoarderInvoiceTemplate extends Model
 {
     protected $table = 'boarder_invoice_template';
+    
+    public $timestamps = false;
 
     protected $fillable = [
         'boarder',

@@ -300,7 +300,8 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::post('boarder-enrollment/new-boarder/boarder-education-info/{id}', [BoarderEducationController::class, 'update'])->name('admin.boarder.education.update');
 
     Route::get('boarder-enrollment/new-boarder/invoice-info/{id}', [BoarderInvoiceController::class, 'edit'])->name('admin.boarder.invoice.edit');
-    Route::post('boarder-enrollment/new-boarder/invoice-info/{id}', [BoarderInvoiceController::class, 'update'])->name('admin.boarder.invoice.update');
+    Route::post('boarder-enrollment/new-boarder/update-boarder-invoice-info', [BoarderInvoiceController::class, 'updateBoarderInvoiceInfo'])->name('admin.boarder.invoice.updateBoarderInvoiceInfo');
+    Route::post('boarder-enrollment/new-boarder/update-boarder-admission-fee', [BoarderInvoiceController::class, 'updateBoarderAdmissionFee'])->name('admin.boarder.invoice.updateBoarderAdmissionFee');
 
     Route::get('boarder-enrollment/new-boarder/working-experience-info/{id}', [BoarderWorkingExperienceController::class, 'edit'])->name('admin.boarder.working.experience.edit');
     Route::post('boarder-enrollment/new-boarder/working-experience-info/{id}', [BoarderWorkingExperienceController::class, 'update'])->name('admin.boarder.working.experience.update');

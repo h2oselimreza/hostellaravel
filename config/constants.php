@@ -268,4 +268,6 @@ return [
     'ADMISSION_FEE_INV_TITLE' => "Admission Fee",
 
     'EXPENSE_NO' => 'EXP',
+    'INVOICE_NO' => 'INV',
+
 ];
