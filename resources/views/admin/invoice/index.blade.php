@@ -74,6 +74,12 @@
                                                         <span class="ui-button-text">Update</span>
                                                     </a>                                    
                                                 </li>
+                                                <li class="mt-2">
+                                                    <a href="#"  onclick="removeInvoice('{{$value->invoice_no}}')"
+                                                    class="d-block ps-3">
+                                                        <span class="ui-button-text">Remove</span>
+                                                    </a>                                    
+                                                </li>
                                                 {{-- <li class="mt-2">
                                                     <form action="#" method="POST">
                                                         @csrf
@@ -97,6 +103,10 @@
 
                         <tfoot>
                             <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -136,7 +146,7 @@ $(document).ready(function () {
                 var column = this;
 
                 // ❌ Skip Action column (last column index = 7)
-                if (column.index() === 6) return;
+                if (column.index() === 9) return;
 
                 var select = $('<select class="form-control" style="width:100%"><option value="">All</option></select>')
                     .appendTo($(column.footer()).empty())
@@ -162,5 +172,62 @@ $(document).ready(function () {
     });
 
 });
+function removeInvoice(invoiceNo) {
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#ec6c62",
+        confirmButtonText: "Yes, remove it!"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            showLoader();
+
+            $.ajax({
+                url: "{{ route('admin.invoice.destroy', ':invoiceNo') }}".replace(':invoiceNo', invoiceNo),
+                type: "DELETE",
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (response) {
+
+                    hideLoader();
+
+                    if (response.status == 1) {
+
+                        Swal.fire({
+                            title: "Removed Successfully",
+                            text: "This invoice has been removed.",
+                            icon: "success"
+                        }).then(() => {
+                            window.location.href = "{{ route('admin.invoice.index') }}";
+                        });
+
+                    } else {
+
+                        Swal.fire("Error", response.message, "error");
+                    }
+                },
+                error: function () {
+
+                    hideLoader();
+
+                    Swal.fire(
+                        "Oops!",
+                        "We couldn't connect to the server!",
+                        "error"
+                    );
+                }
+            });
+
+        }
+
+    });
+
+}
 </script>
 @endpush
