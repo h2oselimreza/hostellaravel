@@ -268,6 +268,13 @@ return [
     'ADMISSION_FEE_INV_TITLE' => "Admission Fee",
 
     'EXPENSE_NO' => 'EXP',
+
+    //------- INVOICE ---------//
     'INVOICE_NO' => 'INV',
+    'INV_TYPE_GENERAL' => 'general',
+    //------- PAYMENT STATUS ---------//
+    'UNPAID' => '0',
+    'PAID' => '1',
+    'PARTIAL_PAID' => '2',
 
 ];

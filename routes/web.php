@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\HomeService\HomeServiceController as HomeServiceH
 use App\Http\Controllers\Admin\HomeService\RaiseHomeServiceController;
 use App\Http\Controllers\Admin\IndividualCustomer\CardRenewController;
 use App\Http\Controllers\Admin\IndividualCustomer\IndividualCustomerController;
+use App\Http\Controllers\Admin\Invoice\InvoiceController;
 use App\Http\Controllers\Admin\MasterData\AppointmentService\AppointmentServiceController;
 use App\Http\Controllers\Admin\MasterData\HomeService\HomeServiceCategoryController;
 use App\Http\Controllers\Admin\MasterData\HomeService\HomeServiceController;
@@ -321,6 +322,10 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
 
     /*===============border list route==================*/
     Route::resource('expense', ExpenseController::class)->names('admin.expense');
+
+    /*===============border list route==================*/
+    Route::resource('invoice', InvoiceController::class)->names('admin.invoice');
+
 
 });
 
