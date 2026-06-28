@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\HomeService\RaiseHomeServiceController;
 use App\Http\Controllers\Admin\IndividualCustomer\CardRenewController;
 use App\Http\Controllers\Admin\IndividualCustomer\IndividualCustomerController;
 use App\Http\Controllers\Admin\Invoice\InvoiceController;
+use App\Http\Controllers\Admin\Invoice\InvoicePaymentController;
 use App\Http\Controllers\Admin\MasterData\AppointmentService\AppointmentServiceController;
 use App\Http\Controllers\Admin\MasterData\HomeService\HomeServiceCategoryController;
 use App\Http\Controllers\Admin\MasterData\HomeService\HomeServiceController;
@@ -320,11 +321,16 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::delete('boarder-enrollment/vacant-seat',[BoarderController::class, 'vacantSeat'])->name('admin.boarder-enrollment.vacant-seat');
     Route::delete('boarder-enrollment/transfer-seat',[BoarderController::class, 'transferSeat'])->name('admin.boarder-enrollment.transfer-seat');
 
-    /*===============border list route==================*/
+    /*===============expense route==================*/
     Route::resource('expense', ExpenseController::class)->names('admin.expense');
 
-    /*===============border list route==================*/
+    /*===============Invoice route==================*/
     Route::resource('invoice', InvoiceController::class)->names('admin.invoice');
+
+    /*===============border list route==================*/
+    Route::resource('invoice-payment', InvoicePaymentController::class)->names('admin.invoice.payment');
+    Route::post('invoice-payment', [InvoicePaymentController::class, 'InvoicePayment'])->name('admin.invoice.invoicePayment');
+
 
 
 });
