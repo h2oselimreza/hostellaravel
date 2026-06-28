@@ -66,16 +66,12 @@
                                                         <span class="ui-button-text">Update</span>
                                                     </a>                                    
                                                 </li>
-                                                {{-- <li class="mt-2">
-                                                    <form action="#" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="d-block ps-3 active_button">
-                                                            <span>
-                                                                {{ $value->is_active ? 'Inactive' : 'Active' }}
-                                                            </span>
-                                                        </button>
-                                                    </form>
-                                                </li> --}}
+                                                <li class="mt-2">
+                                                    <a href="#"  onclick="removeExpense('{{$value->expense_no}}')"
+                                                    class="d-block ps-3">
+                                                        <span class="ui-button-text">Remove</span>
+                                                    </a>                                    
+                                                </li>
                                             </ul>
                                         </div>
                                     </td>
@@ -128,7 +124,7 @@ $(document).ready(function () {
                 var column = this;
 
                 // ❌ Skip Action column (last column index = 7)
-                if (column.index() === 6) return;
+                if (column.index() === 5) return;
 
                 var select = $('<select class="form-control" style="width:100%"><option value="">All</option></select>')
                     .appendTo($(column.footer()).empty())
@@ -154,5 +150,64 @@ $(document).ready(function () {
     });
 
 });
+
+function removeExpense(expenseNo) {
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#ec6c62",
+        confirmButtonText: "Yes, remove it!"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            showLoader();
+
+            $.ajax({
+                url: `/admin/expense/${expenseNo}`,
+                type: "DELETE",
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (response) {
+
+                    hideLoader();
+
+                    if (response.status == 1) {
+
+                        Swal.fire({
+                            title: "Removed Successfully",
+                            text: response.message,
+                            icon: "success",
+                            confirmButtonColor: "#228B22"
+                        }).then(() => {
+                            window.location.href = "/admin/expense";
+                        });
+
+                    } else {
+                        Swal.fire("Oops!", response.message, "warning");
+                    }
+                },
+                error: function (xhr) {
+
+                    hideLoader();
+
+                    let message = "We couldn't connect to the server.";
+
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        message = xhr.responseJSON.message;
+                    }
+
+                    Swal.fire("Error", message, "error");
+                }
+            });
+
+        }
+
+    });
+}
 </script>
 @endpush

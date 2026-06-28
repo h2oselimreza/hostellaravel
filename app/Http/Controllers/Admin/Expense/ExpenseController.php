@@ -348,4 +348,80 @@ class ExpenseController extends Controller
                 ->with('error', $e->getMessage());
         }
     }
+
+    public function destroy($expenseNo)
+    {
+
+        if (empty($expenseNo)) {
+            return response()->json([
+                'status' => 2,
+                'message' => 'Expense number is required.'
+            ]);
+        }
+
+        DB::beginTransaction();
+
+        try {
+
+            // Check expense exists
+            $expense = DB::table('expense_summary')
+                ->where('expense_no', $expenseNo)
+                ->first();
+
+            if (!$expense) {
+                DB::rollBack();
+
+                return response()->json([
+                    'status' => 2,
+                    'message' => 'Expense not found.'
+                ]);
+            }
+
+            // Get attached files
+            $files = DB::table('expense_files')
+                ->where('expense_no', $expenseNo)
+                ->pluck('file_name');
+
+            // Delete summary
+            DB::table('expense_summary')
+                ->where('expense_no', $expenseNo)
+                ->delete();
+
+            // Delete details
+            DB::table('expense_detail')
+                ->where('expense_no', $expenseNo)
+                ->delete();
+
+            // Delete files from storage
+            foreach ($files as $fileName) {
+
+                $filePath = ExpenseFile::IMAGE_PATH . '/' . $fileName;
+
+                if (Storage::disk('public')->exists($filePath)) {
+                    Storage::disk('public')->delete($filePath);
+                }
+            }
+
+            // Delete file records
+            DB::table('expense_files')
+                ->where('expense_no', $expenseNo)
+                ->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 1,
+                'message' => 'Expense deleted successfully.'
+            ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status' => 0,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
 }
