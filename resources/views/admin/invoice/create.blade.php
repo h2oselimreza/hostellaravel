@@ -7,7 +7,7 @@
     <ul class="breadcrumb">
         <li><a href="/admin/Home"> Home /</a></li>
         <li><a href="#"> Invoice /</a></li>
-        <li><a href="/admin/invoice"> Invoice List /</a></li>
+        <li><a href="/admin/invoice-payment"> Invoice List /</a></li>
         <li class="active"><a href="/admin/invoice/create"> Add Invoice</a></li>
     </ul>
 </div>

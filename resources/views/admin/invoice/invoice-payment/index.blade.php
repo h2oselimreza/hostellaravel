@@ -30,9 +30,6 @@
         <div class="col-sm-12 col-md-12">
 
             <div class="panel panel-default"> 
-                <div class="add-button">
-                    <a href="{{ route('admin.invoice.create') }}">Add Invoice</a>
-                </div>
                 <div class="table-responsive">
 
                     <table class="table table-bordered table-hover custom-table" id="datatable">
@@ -76,7 +73,7 @@
                                                         <span class="ui-button-text">Make Payment</span>
                                                     </a>                                    
                                                 </li>
-                                                
+
                                                 <li class="mt-2">
                                                     <a href="{{ $value ? route('admin.invoice.test.invoice', $value->invoice_no) : '#' }}"
                                                     class="d-block ps-3">
