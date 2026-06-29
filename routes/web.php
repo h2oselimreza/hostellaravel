@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\HomeService\RaiseHomeServiceController;
 use App\Http\Controllers\Admin\IndividualCustomer\CardRenewController;
 use App\Http\Controllers\Admin\IndividualCustomer\IndividualCustomerController;
 use App\Http\Controllers\Admin\Invoice\InvoiceController;
+use App\Http\Controllers\Admin\Invoice\InvoiceGenerateController;
 use App\Http\Controllers\Admin\Invoice\InvoicePaymentController;
 use App\Http\Controllers\Admin\MasterData\AppointmentService\AppointmentServiceController;
 use App\Http\Controllers\Admin\MasterData\HomeService\HomeServiceCategoryController;
@@ -327,10 +328,15 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     /*===============Invoice route==================*/
     Route::resource('invoice', InvoiceController::class)->names('admin.invoice');
 
-    /*===============border list route==================*/
+    /*===============Invoice list route==================*/
     Route::resource('invoice-payment', InvoicePaymentController::class)->names('admin.invoice.payment');
     Route::post('invoice-payment', [InvoicePaymentController::class, 'InvoicePayment'])->name('admin.invoice.invoicePayment');
     Route::get('invoice-payment/test-invoice/{invoiceNo}', [InvoicePaymentController::class, 'testInvoice'])->name('admin.invoice.test.invoice');
+
+    Route::get('inv-generate', [InvoiceGenerateController::class, 'index'])->name('admin.invoice.generate');
+    Route::post('inv-generate', [InvoiceGenerateController::class, 'doGenerate'])->name('admin.invoice-generate.doGenerate');
+
+
 
 
 

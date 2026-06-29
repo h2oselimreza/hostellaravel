@@ -77,17 +77,18 @@
                                 </div>	
                             </div>
                         </div>
+
                         <div class="row" id="guestDiv" <?php if ($isGuest == 0) { ?> style="display: none" <?php } ?>>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="form-label">Guest Name</label><span class="text-danger">*</span>
-                                    <input type="text" class="form-control" name="guestName" id="guestName" value="<?php echo $guestName ?>">
+                                    <input type="text" class="form-control" name="guestName" id="guestName" value="<?php echo $guestName ?? '' ?>">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <label class="form-label">Guest Mobile Number</label>
-                                    <input type="text" class="form-control" name="guestMobile" id="guestMobile" onchange="checkMobileNumber(this.value, this.id)" value="<?php echo $guestMobile ?>">
+                                    <input type="text" class="form-control" name="guestMobile" id="guestMobile" onchange="checkMobileNumber(this.value, this.id)" value="<?php echo $guestMobile ?? '' ?>">
                                 </div>
                             </div>
                         </div>

@@ -79,4 +79,60 @@ class InvoiceRepository
             ->where('invoice_no', $invoiceNo)
             ->get();
     }
+
+    public function getBoarderTemplateDetails(array $boarderAutoIdArr)
+    {
+        return DB::table('boarder')
+            ->select([
+                'boarder.boarder_id',
+                'boarder.boarder_name',
+                'boarder.email',
+                'boarder.present_address',
+                'boarder.primary_mobile',
+                'boarder_invoice_template.item_head',
+                'boarder_invoice_template.quantity',
+                'boarder_invoice_template.unit_price',
+                'item_heads.item_head as item_head_name',
+                'item_heads.unit_name',
+                'item_heads.item_category',
+                'item_categories.category_name',
+            ])
+            ->join('boarder_invoice_template', 'boarder_invoice_template.boarder', '=', 'boarder.boarder_id')
+            ->join('item_heads', 'item_heads.item_head_code', '=', 'boarder_invoice_template.item_head')
+            ->join('item_categories', 'item_categories.category_code', '=', 'item_heads.item_category')
+            ->whereIn('boarder.id', $boarderAutoIdArr)
+            ->where('boarder.is_active', 1)
+            ->orderBy('boarder.boarder_id')
+            ->get();
+    }
+
+    public function doGenerate(
+        array $summaryBatchArr,
+        array $detailsBatchArr,
+        array $lastInvoiceDateUpdateArr
+    ) {
+        DB::transaction(function () use (
+            $summaryBatchArr,
+            $detailsBatchArr,
+            $lastInvoiceDateUpdateArr
+        ) {
+
+            // Batch insert invoice summary
+            DB::table('invoice_summary')->insert($summaryBatchArr);
+
+            // Batch insert invoice details
+            DB::table('invoice_detail')->insert($detailsBatchArr);
+
+            // Update boarder table
+            foreach ($lastInvoiceDateUpdateArr as $boarder) {
+                DB::table('boarder')
+                    ->where('boarder_id', $boarder['boarder_id'])
+                    ->update([
+                        'last_invoice_date' => $boarder['last_invoice_date'],
+                        'updated_by'        => $boarder['updated_by'],
+                        'updated_dt_tm'        => $boarder['updated_dt_tm'],
+                    ]);
+            }
+        });
+    }
 }
