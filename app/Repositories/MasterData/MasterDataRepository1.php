@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
-class MasterDataRepository
+class MasterDataRepository1
 {
     public function getVendorGeneralInfo(array $arr)
     {

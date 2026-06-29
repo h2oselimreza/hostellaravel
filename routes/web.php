@@ -89,6 +89,7 @@ use App\Http\Controllers\Admin\Place\PlaceImageController;
 use App\Http\Controllers\Admin\Place\PlaceTimeScheduleController;
 use App\Http\Controllers\Admin\ProfilePhotoController;
 use App\Http\Controllers\Admin\Quotation\QuotationController as QuotationQuotationController;
+use App\Http\Controllers\Admin\Report\ExpenseReportController;
 use App\Http\Controllers\Admin\RMAssign\RMAssignController;
 use App\Http\Controllers\Admin\Room\RoomAdditionalImageController;
 use App\Http\Controllers\Admin\Room\RoomController;
@@ -336,9 +337,9 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::get('inv-generate', [InvoiceGenerateController::class, 'index'])->name('admin.invoice.generate');
     Route::post('inv-generate', [InvoiceGenerateController::class, 'doGenerate'])->name('admin.invoice-generate.doGenerate');
 
-
-
-
+    /*===============Expense report route==================*/
+    Route::get('exp-report', [ExpenseReportController::class, 'index'])->name('admin.expense.report');
+    Route::post('expense-report', [ExpenseReportController::class, 'expenseReportDetails'])->name('admin.expense.report.details');
 
 
 });

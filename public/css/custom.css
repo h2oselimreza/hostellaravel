@@ -86,7 +86,7 @@ label {
 .list-unstyled ul li a {
     font-size: 15px;
 }
-#datatable_wrapper .dt-length select {
+#datatable_wrapper .dt-length select, #datatable2_wrapper .dt-length select {
     width: 75px;
     margin-right: 7px;
 }
