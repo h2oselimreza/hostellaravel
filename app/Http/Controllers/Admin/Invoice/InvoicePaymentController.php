@@ -138,4 +138,14 @@ class InvoicePaymentController extends Controller
                 ->with('error', $e->getMessage());
         }
     }
+
+    public function testInvoice($invoiceNo, InvoiceRepository $invoiceRepository) {
+
+        $arr['invoiceNo'] = $invoiceNo;
+        $arr['invoiceType'] = config('constants.INV_TYPE_GENERAL');
+        $invoiceSummary = $invoiceRepository->getInvoiceSummary($arr);
+        $invoiceDetails = $invoiceRepository->getInvoiceDetails($arr);
+
+        return view('admin.invoice.invoice-payment.test-invoice',compact('invoiceSummary','invoiceDetails'));
+    }
 }

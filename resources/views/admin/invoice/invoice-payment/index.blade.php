@@ -76,10 +76,11 @@
                                                         <span class="ui-button-text">Make Payment</span>
                                                     </a>                                    
                                                 </li>
+                                                
                                                 <li class="mt-2">
-                                                    <a href="#"  onclick="removeInvoice('{{$value->invoice_no}}')"
+                                                    <a href="{{ $value ? route('admin.invoice.test.invoice', $value->invoice_no) : '#' }}"
                                                     class="d-block ps-3">
-                                                        <span class="ui-button-text">Remove</span>
+                                                        <span class="ui-button-text">Test Invoice</span>
                                                     </a>                                    
                                                 </li>
                                                 {{-- <li class="mt-2">

@@ -330,6 +330,8 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     /*===============border list route==================*/
     Route::resource('invoice-payment', InvoicePaymentController::class)->names('admin.invoice.payment');
     Route::post('invoice-payment', [InvoicePaymentController::class, 'InvoicePayment'])->name('admin.invoice.invoicePayment');
+    Route::get('invoice-payment/test-invoice/{invoiceNo}', [InvoicePaymentController::class, 'testInvoice'])->name('admin.invoice.test.invoice');
+
 
 
 
