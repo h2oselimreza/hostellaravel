@@ -393,4 +393,75 @@ class ReportRepository
             ->orderBy('item_categories.category_name', 'ASC')
             ->get();
     }
+
+    public function getIncomeLossProfitDetails(array $arr)
+    {
+        return DB::table('invoice_detail')
+            ->selectRaw("
+                SUM(invoice_detail.amount) as total_income,
+                SUM(invoice_detail.quantity) as total_quantity,
+                invoice_detail.unit_name,
+                invoice_detail.unit_price,
+                invoice_detail.adjust,
+                SUM(invoice_detail.amount) / SUM(invoice_detail.quantity) as average_unit_price,
+                COUNT(invoice_detail.id) as total_tran,
+                item_heads.item_head as item_head_name,
+                invoice_detail.item_head,
+                item_heads.item_category,
+                item_categories.category_name
+            ")
+            ->join('invoice_summary', 'invoice_summary.invoice_no', '=', 'invoice_detail.invoice_no')
+            ->join('item_heads', 'item_heads.item_head_code', '=', 'invoice_detail.item_head')
+            ->join('item_categories', 'item_categories.category_code', '=', 'item_heads.item_category')
+            ->whereDate('invoice_summary.invoice_date', '>=', $arr['fromDate'])
+            ->whereDate('invoice_summary.invoice_date', '<=', $arr['toDate'])
+            ->where('invoice_summary.is_paid', config('constants.PAID'))
+            ->groupBy(
+                'invoice_detail.item_head',
+                'invoice_detail.unit_name',
+                'invoice_detail.unit_price',
+                'invoice_detail.adjust',
+                'item_heads.item_head',
+                'item_heads.item_category',
+                'item_categories.category_name'
+            )
+            ->orderBy('item_categories.category_name', 'ASC')
+            ->orderBy('invoice_detail.item_head', 'ASC')
+            ->get();
+    }
+
+    public function getExpLossProfitDetails(array $arr)
+    {
+        return DB::table('expense_detail')
+            ->selectRaw("
+                SUM(expense_detail.amount) as total_expense,
+                SUM(expense_detail.quantity) as total_quantity,
+                expense_detail.unit_name,
+                expense_detail.unit_price,
+                expense_detail.adjust,
+                SUM(expense_detail.amount) / SUM(expense_detail.quantity) as average_unit_price,
+                COUNT(expense_detail.id) as total_tran,
+                cost_heads.cost_head as expense_head_name,
+                expense_detail.expense_head,
+                cost_heads.cost_category,
+                cost_categories.category_name
+            ")
+            ->join('expense_summary', 'expense_summary.expense_no', '=', 'expense_detail.expense_no')
+            ->join('cost_heads', 'cost_heads.cost_head_code', '=', 'expense_detail.expense_head')
+            ->join('cost_categories', 'cost_categories.category_code', '=', 'cost_heads.cost_category')
+            ->whereDate('expense_summary.expense_date', '>=', $arr['fromDate'])
+            ->whereDate('expense_summary.expense_date', '<=', $arr['toDate'])
+            ->groupBy(
+                'expense_detail.expense_head',
+                'expense_detail.unit_name',
+                'expense_detail.unit_price',
+                'expense_detail.adjust',
+                'cost_heads.cost_head',
+                'cost_heads.cost_category',
+                'cost_categories.category_name'
+            )
+            ->orderBy('cost_categories.category_name', 'ASC')
+            ->orderBy('expense_detail.expense_head', 'ASC')
+            ->get();
+    }
 }
