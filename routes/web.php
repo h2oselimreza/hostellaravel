@@ -90,6 +90,7 @@ use App\Http\Controllers\Admin\Place\PlaceTimeScheduleController;
 use App\Http\Controllers\Admin\ProfilePhotoController;
 use App\Http\Controllers\Admin\Quotation\QuotationController as QuotationQuotationController;
 use App\Http\Controllers\Admin\Report\ExpenseReportController;
+use App\Http\Controllers\Admin\Report\IncomeReportController;
 use App\Http\Controllers\Admin\RMAssign\RMAssignController;
 use App\Http\Controllers\Admin\Room\RoomAdditionalImageController;
 use App\Http\Controllers\Admin\Room\RoomController;
@@ -340,6 +341,10 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     /*===============Expense report route==================*/
     Route::get('exp-report', [ExpenseReportController::class, 'index'])->name('admin.expense.report');
     Route::post('expense-report', [ExpenseReportController::class, 'expenseReportDetails'])->name('admin.expense.report.details');
+
+    /*===============Expense report route==================*/
+    Route::get('income-report', [IncomeReportController::class, 'index'])->name('admin.income.report');
+    Route::post('income-report', [IncomeReportController::class, 'incomeReportDetails'])->name('admin.income.report.details');
 
 
 });
