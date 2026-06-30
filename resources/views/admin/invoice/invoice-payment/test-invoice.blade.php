@@ -4,7 +4,7 @@
         <title>Invoice</title>
         <link rel="icon" href="{{ asset('assets/images/company/favicon1.png') }}" type="image/x-icon">
         <style>
-            .poligon {
+            /* .poligon {
                 display: inline-block;
                 position: relative;
                 width: 100%;
@@ -13,7 +13,7 @@
                 box-sizing: border-box;
                 -webkit-clip-path: polygon(0 80%, 0 0, 100% 0, 100% 80%, 50% 100%);
                 clip-path: polygon(0 75%, 0 0, 100% 0, 100% 75%, 50% 100%);
-            }
+            } */
 
         </style>
 
@@ -59,7 +59,7 @@
                 <style>
                     .content-div{width: 735px;font-family:Calibri;background-color: #FFF;}
 
-                    .heading-right{padding: 10px 15px; color: #ffffff}
+                    .heading-right{padding: 10px 15px;}
                     .heading-right-head{font-weight: bold;font-size: 25px;}
                     .heading-right-body{font-size: 14px;line-height: 14px;}
                     .heading-border-bottom{margin: 3px 28px;border: 1px solid #ababab;}
@@ -97,7 +97,7 @@
                 <div id="" class="content-div">
                     <div class="poligon">
                         <table border="0" cellpadding="0" cellspacing="0" align="center" width="726">
-                            <td align="left" class="heading-right"><span class="heading-right-head">Super Hostel</span><br>
+                            <td align="left" class="heading-right"><span class="heading-right-head">{{ env('APP_NAME') }}</span><br>
                             </td>
                             <td align="right" class="heading-right">
                                 <span class="heading-right-body">
