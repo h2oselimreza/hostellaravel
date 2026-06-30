@@ -23,7 +23,9 @@ class CostHeadRequest extends FormRequest
     {
         return [
             'cost_category' => 'required',
-            'cost_head' => 'required'
+            'cost_head' => 'required',
+            'unit_name' => 'required',
+            'unit_price' => 'required'
         ];
     }
 }

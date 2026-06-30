@@ -43,6 +43,8 @@
                                 <th class="text-center">SL</th>
                                 <th class="text-center">Expense Category</th>
                                 <th class="text-start">Expense Head</th>
+                                <th class="text-start">Unit Name</th>
+                                <th class="text-start">Unit Price</th>
                                 <th class="text-center">Status</th>
                                 <th>Action</th>
                             </tr>
@@ -55,6 +57,8 @@
                                         <td class="text-center">{{ $loop->iteration }}</td>
                                         <td class="text-center">{{ $value->category->category_name }}</td>
                                         <td>{{ $value->cost_head  }}</td>
+                                        <td>{{ $value->unit_name  }}</td>
+                                        <td>{{ $value->unit_price  }}</td>
                                         <td class="text-center">{{ ($value->is_active) ? 'Active':'Inactive' }}</td>
                                         <td class="text-center">
                                             <div class="dropdown">

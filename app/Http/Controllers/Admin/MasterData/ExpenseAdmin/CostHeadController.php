@@ -56,9 +56,10 @@ class CostHeadController extends Controller
             $codeHeadCode = $prefix . $tokenService->getTokenByCode($prefix);
         
             CostHead::create([
-                'company'             => auth()->user()->company_code ?? '999999',
                 'cost_category'     => $data['cost_category'],
                 'cost_head'       => $data['cost_head'],
+                'unit_name'       => $data['unit_name'],
+                'unit_price'       => $data['unit_price'],
                 'cost_head_code'       => $codeHeadCode,
                 'cost_head_dis_code' => $codeHeadCode,
                 'is_active'           => 1,
@@ -113,9 +114,10 @@ class CostHeadController extends Controller
         try {
 
             $cost_head->update([
-                'company'             => auth()->user()->company_code ?? '999999',
                 'cost_category'     => $data['cost_category'],
                 'cost_head'       => $data['cost_head'],
+                'unit_name'       => $data['unit_name'],
+                'unit_price'       => $data['unit_price'],
                 'is_active'           => 1,
             ]);
 

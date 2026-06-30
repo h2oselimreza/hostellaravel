@@ -10,7 +10,6 @@ class CostHead extends BaseModel
     protected $table = 'cost_heads';
 
     protected $fillable = [
-        'company',
         'cost_category',
         'cost_head',
         'unit_name',
