@@ -40,9 +40,21 @@
 @php
 $btnFlag = "";
 @endphp
+
+@php
+    $subModulesArr = get_sub_modules('admin/master-data/expense');
+@endphp
+
+@if(empty($subModulesArr))
+    <script>
+        window.location.href = "{{ route('admin.dashboard') }}";
+    </script>
+@endif
+
 <div class="row text-center border-ccc vehicle" role="group" aria-label="Vehicle Filters">
-    
-    <div class="col col-md-6">
+
+    @if(in_array('costCategory', $subModulesArr))
+    <div class="col col-md-{{!in_array('costHead', $subModulesArr) ? '12' : '6'}}">
         <div class="btn-group d-block" role="group">
             <button type="button"
                 onclick="areaRoute('master-data/expense/cost-category')"
@@ -51,8 +63,10 @@ $btnFlag = "";
             </button>
         </div>
     </div>
+    @endif
 
-    <div class="col col-md-6">
+    @if(in_array('costHead', $subModulesArr))
+    <div class="col col-md-{{!in_array('costCategory', $subModulesArr) ? '12' : '6'}}">
         <div class="btn-group d-block" role="group">
             <button type="button"
                 onclick="areaRoute('master-data/expense/cost-head')"
@@ -61,4 +75,5 @@ $btnFlag = "";
             </button>
         </div>
     </div>
+    @endif
 </div>
