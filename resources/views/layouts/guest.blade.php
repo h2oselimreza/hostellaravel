@@ -20,7 +20,7 @@
                 background-color: #00BCD4;
                 opacity: 0.9;
                 padding-left: 0;
-                max-width: 405px;
+                max-width: 370px;
                 margin: 5% auto;
                 overflow-x: hidden;
             }

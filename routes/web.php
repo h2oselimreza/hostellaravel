@@ -123,10 +123,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 
+// Route::get('/login', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
-//Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/new-register', [RegisteredUserController::class, 'doRegistration'])->name('new-register');
 Route::post('/new-register', [RegisteredUserController::class, 'doRegistration'])->name('new-register');
 Route::post('/registration/check-duplicate-user', [RegisteredUserController::class, 'checkDuplicateUser'])->name('registration.checkDuplicateUser');

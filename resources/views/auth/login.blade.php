@@ -17,15 +17,21 @@
             color: #555;
             font-size: 15px;
         }
+        /* .g-recaptcha {
+            transform: scale(1.01);
+            -webkit-transform: scale(1.01);
+            transform-origin: left top;
+            -webkit-transform-origin: left top;
+        } */
     </style>
-     <div class="mb-6 text-center vroom_logo">
+     <div class=" text-center vroom_logo">
         <img src="{{ asset('assets/website/images/vroom_logo.png') }}" alt="Logo" class="mx-auto h-16">
     </div>
 
-    <div class="text-center font-20 m-b-10">
+    <div class="text-center font-20 mt-3 mb-3">
         <b>
-            <span id="corporateHeading" class="corporate switch_button login_active" onclick="loginType('1')">Corporate</span> | 
-            <span id="invidualHeading" class="individual switch_button" onclick="loginType('2')">Individual </span>
+            <span id="corporateHeading" class="corporate switch_button login_active" onclick="loginType('1')">Hostel</span> 
+            {{-- <span id="invidualHeading" class="individual switch_button" onclick="loginType('2')">Individual </span> --}}
         </b>
     </div>
 
@@ -57,7 +63,7 @@
                 <x-input-label for="Mobile No" :value="__('Mobile No')" />
             </div>
             <div id="username">
-                <x-input-label for="username" :value="__('Username')" />
+                <x-input-label for="username" :value="__('Username or Mobile No')" />
             </div>
             <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus />
             <x-input-error :messages="$errors->get('username')" class="mt-2" />
@@ -92,11 +98,11 @@
         <div class="flex items-center justify-between mt-4">
 
             <div class="flex items-center gap-1">
-                <a href="{{ url('/') }}" class="underline text-sm" style="color:#00BCD4">
+                {{-- <a href="{{ url('/') }}" class="underline text-sm" style="color:#00BCD4">
                     Registration
                 </a>
 
-                <span>|</span>
+                <span>|</span> --}}
 
                 <a href="{{ route('password.request') }}" class="underline text-sm" style="color:#00BCD4;">
                     Forgot your password?
