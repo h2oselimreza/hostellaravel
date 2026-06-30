@@ -233,7 +233,7 @@
                                     <td class="content-table-td bottom-border" align="left" ><b> Discount</b></td>
                                     <td class="content-table-td bottom-border" align="center">:</td>
                                     <td class="content-table-td bottom-border" align="right">
-                                        <input class="form-control custom-form-control" id="discount" name="discount" type="text" onkeyup="calculateDiscount()" onchange="calculateDiscount()" value="<?php echo $discountAmount ?>">
+                                        <input class="form-control custom-form-control" id="discount" name="discount" type="text" onchange="calculateDiscount()" onchange="calculateDiscount()" value="<?php echo $discountAmount ?>">
                                     </td>
                                 </tr>
                                 <tr class="table-td-info">
