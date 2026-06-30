@@ -54,8 +54,7 @@ class BoarderPersonalInfoController extends Controller
             $now = Carbon::now();
             $userId = Auth::user()->user_id;
 
-            $isSingle =
-                ($validated['marital_status'] ?? null) === 'Single';
+            $isSingle = ($validated['marital_status'] ?? null) === 'Single';
 
             $boarderData = array_merge(
                 $validated,
@@ -197,7 +196,7 @@ class BoarderPersonalInfoController extends Controller
         return redirect()->back()->with('success', 'Status Updated Successfully');
     }
 
-        function getCommonTableElement($commonTableElementArr)
+    function getCommonTableElement($commonTableElementArr)
     {
         $query = DB::table('common_table');
 

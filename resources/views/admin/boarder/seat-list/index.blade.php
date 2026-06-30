@@ -66,29 +66,27 @@
                                     <td class="td-center">{{ $value->allocated_dt_tm ? get_date_time_format($value->allocated_dt_tm) : '' }}</td>
                                     <td class="td-center">{{ $value->boarder ? 'Booked' : 'Vacant' }}</td>
                                     <td class="text-center">
-                                        <div class="dropdown">
-                                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
-                                                Action
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="{{ $value ? route('admin.boarder-enrollment.new-boarder.personal.info.create', [$value->room_code, $value->seat_code]) : '#' }}" 
-                                                    class="d-block ps-3">
-                                                        <span class="ui-button-text">Enroll New Boarder</span>
-                                                    </a>                                    
-                                                </li>
-                                                {{-- <li class="mt-2">
-                                                    <form action="#" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="d-block ps-3 active_button">
-                                                            <span>
-                                                                {{ $value->is_active ? 'Inactive' : 'Active' }}
-                                                            </span>
-                                                        </button>
-                                                    </form>
-                                                </li> --}}
-                                            </ul>
-                                        </div>
+                                        @if (!$value->boarder)
+                                            <div class="dropdown">
+                                                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                                                    Action
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a href="{{ $value ? route('admin.boarder-enrollment.new-boarder.personal.info.create', [$value->room_code, $value->seat_code]) : '#' }}" 
+                                                        class="d-block ps-3">
+                                                            <span class="ui-button-text" style="font-family: 10px">Enroll New Boarder</span>
+                                                        </a>                                    
+                                                    </li>
+                                                    <li class="mt-3">
+                                                        <a href="{{ $value ? route('admin.boarder-enrollment.unallocated.boarder', [$value->room_code, $value->seat_code]) : '#' }}" 
+                                                        class="d-block ps-3">
+                                                            <span class="ui-button-text" style="font-family: 10px">Enroll Existing Boarder</span>
+                                                        </a>                                    
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

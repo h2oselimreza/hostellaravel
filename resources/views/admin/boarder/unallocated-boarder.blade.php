@@ -2,11 +2,12 @@
 @section('content')
 
 <div class="header dashboard_from">
-    <h1 class="page-title">Boarder List</h1>
+    <h1 class="page-title">Unallocated Boarder List</h1>
     <ul class="breadcrumb">
         <li><a href="{{ url('admin/dashboard') }}"> Home</a></li>
         <li><a href="#">/  Boarder Enrollment </a></li>
-        <li><a href="{{ url('admin/boarder-enrollment/boarder') }}">/ Boarder List</a></li>
+        <li><a href="{{ route('admin.boarder-enrollment.new-boarder.seatList',$roomCode) }}">/ Seat List</a></li>
+        <li><a href="{{ url('admin/boarder-enrollment/unallocated-boarder') }}">/ Unallocated Boarder List</a></li>
     </ul>
 </div>
 <div class="main-content">
@@ -88,50 +89,13 @@
                                     </td>
 
                                     <td class="td-center">
-                                        <div class="dropdown">
                                         <button
-                                            class="btn btn-secondary btn-sm dropdown-toggle"
                                             type="button"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                            Action
+                                            class="btn btn-primary btn-xs btn-circle-puchase"
+                                            onclick="seatAllocate('{{ $boarder->boarder_id }}', '{{ $roomCode }}', '{{ $seatCode }}')">
+
+                                            <i class="fa fa-arrow-down"></i>
                                         </button>
-
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <li>
-                                                <a class="dropdown-item"
-                                                href="{{ route('admin.boarder-enrollment.new-boarder.personal.info.edit', $boarder->boarder_id) }}">
-                                                    Update
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a class="dropdown-item"
-                                                href="#"
-                                                onclick="vacant('{{ $boarder->boarder_id }}')">
-                                                    Vacant
-                                                </a>
-                                            </li>
-
-                                            @if($boarder->is_active == 1)
-                                                <li>
-                                                    <a class="dropdown-item"
-                                                    href="#"
-                                                    onclick="statusChange('{{ $boarder->boarder_id }}', '2')">
-                                                        Inactive
-                                                    </a>
-                                                </li>
-                                            @endif
-
-                                            <li>
-                                                <a class="dropdown-item"
-                                                href="#"
-                                                onclick="showSeatModal('{{ $boarder->boarder_id }}')">
-                                                    Transfer
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -141,123 +105,6 @@
                     <input type="hidden" id="transferBoarderId">
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<button
-    type="button"
-    class="btn btn-default d-none"
-    data-toggle="modal"
-    data-target="#seatModal"
-    id="showSeatModalBtn">
-</button>
-
-<div class="modal fade" id="seatModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <h4 class="modal-title" id="largeModalLabel">
-                    Vacant Seat List
-                </h4>
-            </div>
-
-            <div class="modal-body">
-                <div class="table-responsive" style="overflow-x:auto;">
-                    <table class="table table-bordered table-hover jq-option-datatable custom-table dataTable">
-                        <thead>
-                            <tr class="bg-primary">
-                                <th>SL</th>
-                                <th>Building</th>
-                                <th>Floor</th>
-                                <th>Room</th>
-                                <th>Seat Code</th>
-                                <th>Seat Title</th>
-                                <th>Seat Type</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                        <tfoot>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </tfoot>
-
-                        <tbody>
-                            @php($serial = 1)
-
-                            @foreach($seats as $seat)
-
-                                @if(!empty($seat->boarder))
-                                    @continue
-                                @endif
-
-                                <tr>
-                                    <td class="td-center">
-                                        {{ $serial }}
-                                    </td>
-
-                                    <td>
-                                        {{ $seat->building_title }}
-                                    </td>
-
-                                    <td>
-                                        {{ $seat->floor_title }}
-                                    </td>
-
-                                    <td>
-                                        {{ $seat->room_title }}
-                                    </td>
-
-                                    <td class="td-center">
-                                        {{ $seat->seat_code }}
-                                    </td>
-
-                                    <td>
-                                        {{ $seat->title }}
-                                    </td>
-
-                                    <td class="td-center">
-                                        {{ $seat->seat_type_title }}
-                                    </td>
-
-                                    <td class="td-center">
-                                        <input
-                                            type="hidden"
-                                            id="seatCodeHidden{{ $serial }}"
-                                            value="{{ $seat->seat_code }}">
-
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary btn-xs btn-circle-puchase"
-                                            onclick="transferSeat({{ $serial }})">
-
-                                            <i class="fa fa-arrow-down"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                @php($serial++)
-                            @endforeach
-
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link waves-effect save_button" id="seatModalCloseBtn" data-bs-dismiss="modal"> CLOSE</button>
-            </div>
-
         </div>
     </div>
 </div>
@@ -310,13 +157,13 @@
 });    
 </script>
 <script>
-    function vacant(boarderId) {
+    function seatAllocate(boarderId, roomCode, seatCode) {
 
         Swal.fire({
             title: 'Are you sure?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Yes, vacant this seat!',
+            confirmButtonText: 'Yes, Allocate this seat!',
             cancelButtonText: 'Cancel',
             confirmButtonColor: '#ec6c62',
             reverseButtons: true
@@ -327,10 +174,12 @@
                 showLoader();
 
                 $.ajax({
-                    url: "{{ route('admin.boarder-enrollment.vacant-seat') }}",
-                    type: "DELETE",
+                    url: "{{ route('admin.boarder-enrollment.seat-allocate') }}",
+                    type: "POST",
                     data: {
                         boarderId: boarderId,
+                        roomCode: roomCode,
+                        seatCode: seatCode,
                         _token: "{{ csrf_token() }}"
                     },
                     success: function (response) {
@@ -340,20 +189,25 @@
                         if (response.code == 1) {
 
                             Swal.fire({
-                                title: 'Vacant Successfully',
-                                text: 'This seat is vacant now',
+                                title: 'Seat has been allocated Successfully',
+                                text: 'This seat is booked now',
                                 icon: 'success',
                                 confirmButtonColor: '#228B22'
                             }).then(() => {
 
                                 window.location.href =
-                                    "{{ route('admin.boarder-enrollment.boarder') }}";
+                                    "{{ route('admin.boarder-enrollment.new-boarder') }}";
                             });
 
                         } else if (response.code == 2) {
-
-                            window.location.href =
-                                "{{ route('admin.boarder-enrollment.boarder') }}";
+                            Swal.fire({
+                                title: 'Something went wrong!',
+                                text: 'Please try again later.',
+                                icon: 'error',
+                                confirmButtonColor: '#f0ad4e'
+                            }).then(() => {
+                                window.location.href = "{{ route('admin.boarder-enrollment.new-boarder') }}";
+                            });
                         }
                     },
                     error: function () {

@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Admin\Boarder;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Room;
+use App\Models\Admin\Seat;
+use App\Models\Admin\SeatAllocation;
 use App\Repositories\BoarderRepository;
 use App\Repositories\CommonRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Expr\FuncCall;
 
 class BoarderController extends Controller
 {
@@ -122,6 +127,14 @@ class BoarderController extends Controller
                 ->where('boarder', $boarderId)
                 ->delete();
 
+            DB::table('boarder')
+                ->where('boarder_id', $boarderId,)
+                ->update([
+                    'is_active'   => 0,
+                    'updated_by'  => Auth::user()->user_id,
+                    'updated_dt_tm' => Carbon::now(),
+                ]);
+
             DB::commit();
 
             return response()->json([
@@ -223,6 +236,72 @@ class BoarderController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function unallocatedBoarder($roomCode, $seatCode, BoarderRepository $boarderRepository){
+        $isRoomExists = Room::where('room_code', $roomCode)->exists();
+        $isSeatExists = Seat::where('seat_code', $seatCode)->exists();
+
+        if (!$isRoomExists || !$isSeatExists) {
+            return redirect()
+                ->route('admin.boarder-enrollment.new-boarder')
+                ->with('error', 'Invalid room or seat code.');
+        }
+
+        $boarders = $boarderRepository->getBoarders([
+            'isActive' => 2,
+        ]);
+        
+        return view('admin.boarder.unallocated-boarder', compact('boarders','roomCode','seatCode'));
+    }
+
+    public function seatAllocate(Request $request)
+    {
+
+        $request->validate([
+            'seatCode'  => 'required|exists:hst_seat,seat_code',
+            'boarderId' => 'required|exists:boarder,boarder_id',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('boarder')
+                ->where('boarder_id', $request->boarderId,)
+                ->update([
+                    'is_active'   => 1,
+                    'updated_by'  => Auth::user()->user_id,
+                    'updated_dt_tm' => Carbon::now(),
+                ]);
+
+            SeatAllocation::create([
+                'seat'            => $request->seatCode,
+                'boarder'         => $request->boarderId,
+                'allocated_dt_tm' => Carbon::now(),
+                'created_by'      => Auth::user()->user_id,
+                'created_dt_tm'   => Carbon::now(),
+                'updated_by'      => Auth::user()->user_id,
+                'updated_dt_tm'   => Carbon::now(),
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'code' => 1,
+                'message' => 'Seat allocated successfully.'
+            ]);
+
+        } catch (\Throwable $e) {
+
+            DB::rollBack();
+
+            Log::error($e);
+
+            return response()->json([
+                'code' => 2,
+                'message' => 'Something went wrong.'
             ], 500);
         }
     }

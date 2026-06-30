@@ -327,6 +327,10 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::delete('boarder-enrollment/vacant-seat',[BoarderController::class, 'vacantSeat'])->name('admin.boarder-enrollment.vacant-seat');
     Route::delete('boarder-enrollment/transfer-seat',[BoarderController::class, 'transferSeat'])->name('admin.boarder-enrollment.transfer-seat');
 
+    Route::get('boarder-enrollment/unallocated-boarder/{roomCode}/{seatCode}', [BoarderController::class, 'unallocatedBoarder'])->name('admin.boarder-enrollment.unallocated.boarder');
+    Route::post('boarder-enrollment/seat-allocate', [BoarderController::class, 'seatAllocate'])->name('admin.boarder-enrollment.seat-allocate');
+
+
     /*===============expense route==================*/
     Route::resource('expense', ExpenseController::class)->names('admin.expense');
 
