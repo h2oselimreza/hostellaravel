@@ -9,6 +9,9 @@
         <li><a href="{{ url('admin/master-data/income') }}">/ Income</a></li>
     </ul>
 </div>
+@php
+    $subModulesArr = get_sub_modules('admin/master-data/income');
+@endphp
 <div class="main-content">
     <div class="row">
         <div class="col-sm-12 col-md-12">
@@ -18,6 +21,7 @@
             <div class="panel panel-default"> 
                 <div class="row justify-content-center text-center">
 
+                    @if(in_array('itemCategory', $subModulesArr))
                     <!-- category -->
                     <div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="circle-tile">
@@ -40,7 +44,9 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
+                    @if(in_array('itemHead', $subModulesArr))
                     <!-- product -->
                     <div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="circle-tile">
@@ -63,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
