@@ -21,9 +21,6 @@ return [
     'COMPANY_NAME' => 'VROOM',
     'SERVER_ACCESS_TOKEN' => '13523456',
 
-    'P_ADMIN' => 'admin',
-    'CLIENT'  => 'client',
-
     'USER_TYPE_ADMIN_EMP' => 'admin_employee',
     'USER_TYPE_CORP_EMP'   => 'corporate_employee',
     'USER_TYPE_INDV_EMP'   => 'indv_employee',
@@ -276,5 +273,8 @@ return [
     'UNPAID' => '0',
     'PAID' => '1',
     'PARTIAL_PAID' => '2',
+
+    'P_ADMIN' => 'admin',
+    'CLIENT'  => 'client',
 
 ];

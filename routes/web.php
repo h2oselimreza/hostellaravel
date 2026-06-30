@@ -148,8 +148,10 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
 
     Route::get('user-groups',[UserGroupController::class, 'index'])->name('admin.user-groups.index');
     Route::get('user-groups-data', [UserGroupController::class, 'getUserGroups'])->name('user-groups.data.index');
-    Route::get('user-group',[UserGroupController::class, 'create'])->name('admin.user-groups.create');
-    Route::post('user-group',[UserGroupController::class, 'storeOrUpdate'])->name('admin.user-groups.store');
+    Route::get('user-group/create',[UserGroupController::class, 'create'])->name('admin.user-groups.create');
+    Route::post('user-group/create',[UserGroupController::class, 'create'])->name('admin.user-groups.create');
+    Route::post('user-group',[UserGroupController::class, 'store'])->name('admin.user-groups.store');
+    //Route::post('user-group',[UserGroupController::class, 'storeOrUpdate'])->name('admin.user-groups.store');
     Route::get('user-groups/{id}',[UserGroupController::class, 'edit'])->name('admin.user-groups.edit');
     Route::put('user-group/{id}', [UserGroupController::class, 'storeOrUpdate'])->name('admin.user-groups.update');
     Route::patch('user-groups/{id}/status', [UserGroupController::class, 'updateStatus'])->name('admin.user-groups.status');

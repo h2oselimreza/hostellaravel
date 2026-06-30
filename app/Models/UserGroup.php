@@ -21,6 +21,8 @@ class UserGroup extends Model
     protected $fillable = [
         'group_name',
         'modules',
+        'sub_modules',
+        'panel_type',
         'created_dt_tm',
         'updated_dt_tm',
         'is_active',

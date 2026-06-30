@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserGroupController extends Controller
 {
@@ -92,10 +94,107 @@ class UserGroupController extends Controller
         }
     }
 
-    public function create(){
-        $modules = Module::orderBy('module_order', 'asc')->get();
-        $moduleGroups = ModuleGroup::orderBy('module_group_order', 'asc')->get();
-        return view('admin.user_groups.create_update',compact('modules','moduleGroups'));
+    public function create(Request $request){
+        //dd($request->all());
+        $panelType = ($request->panelType) ? $request->panelType : NULL;
+
+        if($panelType){
+            $modules = Module::where('panel_type', $panelType)->orderBy('module_order', 'asc')->get();
+
+            $moduleGroups = ModuleGroup::where('panel_type', $panelType)->orderBy('module_group_order', 'asc')->get();
+
+            $subModules = SubModules::where('panel_type', $panelType)->get();
+
+            return view('admin.user_groups.create-new',compact('modules','moduleGroups','subModules','panelType'));
+        }else{
+            return view('admin.user_groups.create-new',compact('panelType'));
+        }
+        
+    }
+
+    public function store(Request $request)
+    {
+
+        $request->validate([
+            'panelType'     => 'required|string',
+            'user_group_name' => 'required|string|max:255',
+            'moduleList'    => 'required|array|min:1',
+            'moduleList.*'  => 'integer',
+            'subModuleList' => 'nullable|array',
+            'subModuleList.*' => 'integer',
+        ]);
+
+        $result = $this->setModules(
+            $request->moduleList,
+            $request->user_group_name,
+            $request->subModuleList,
+            $request->panelType
+        );
+
+        if ($result == 1) {
+            return redirect()
+                ->route('admin.user-groups.index')
+                ->with('success', 'User group created successfully.');
+        }
+
+        return redirect()
+            ->back()
+            ->withInput()
+            ->with('error', 'Group name already exists or invalid module selection.');
+    }
+
+    private function setModules(array $moduleList, string $userGroupName, ?array $subModuleLists, string $panelType): int
+    {
+        try {
+            DB::beginTransaction();
+
+            $modules = implode(',', $moduleList);
+            $subModules = '';
+
+            if (!empty($subModuleLists)) {
+
+                $subModules = implode(',', $subModuleLists);
+
+                $dbModuleArr = SubModules::whereIn('id', $subModuleLists)
+                    ->distinct()
+                    ->pluck('module')
+                    ->toArray();
+
+                foreach ($dbModuleArr as $moduleId) {
+                    if (!in_array($moduleId, $moduleList)) {
+                        DB::rollBack();
+                        return 2;
+                    }
+                }
+            }
+
+            if (UserGroup::where('group_name', $userGroupName)->exists()) {
+                DB::rollBack();
+                return 2;
+            }
+
+            UserGroup::create([
+                'group_name'  => $userGroupName,
+                'modules'     => $modules,
+                'sub_modules' => $subModules,
+                'panel_type'  => $panelType, // Don't hardcode 'ddd'
+                'created_by'  => Auth::user()->user_id,
+                'updated_by'  => Auth::user()->user_id,
+            ]);
+
+            DB::commit();
+
+            return 1;
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            Log::error('User group creation failed.', [
+                'message' => $e->getMessage(),
+                'line'    => $e->getLine(),
+                'file'    => $e->getFile(),
+            ]);
+
+            return 0;
+        }
     }
 
     public function edit($id)
