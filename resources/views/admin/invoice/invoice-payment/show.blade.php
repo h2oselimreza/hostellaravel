@@ -12,10 +12,10 @@
 <div class="header">
     <h1 class="page-title">Make Payment</h1>
     <ul class="breadcrumb">
-        <li><a href="/admin/Home"> Home</a></li>
-        <li><a href="#"> Invoice</a></li>
-        <li><a href="/admin/Invoice/invoicePaymentList"> Invoice Payment</a></li>
-        <li class="active"><a href="/admin/Invoice/invoicePaymentShow?invoiceNo=<?php echo $invoiceNo ?>"> Make Payment</a></li>
+        <li><a href="/admin/Home"> Home</a> / </li>
+        <li><a href="#"> Invoice</a> / </li>
+        <li><a href="/admin/invoice-payment"> Invoice Payment</a> / </li>
+        <li class="active"><a href="{{ route('admin.invoice.payment.show',$invoiceNo) }}"> Make Payment</a></li>
     </ul>
 </div>
 
@@ -38,7 +38,7 @@
                         $boarderPrimaryMobile = $invoiceSummary['boarder_primary_mobile'];
                         $boarderName = $invoiceSummary['boarder_name'];
                         $boarderCode = $invoiceSummary['boarder'];
-
+                        $isPaid = $invoiceSummary['is_paid'];
                         if (!$boarderCode) {
                             $guestName = $invoiceSummary['guest_name'];
                             $guestMobile = $invoiceSummary['guest_mobile'];
@@ -85,13 +85,13 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label class="form-label mb-0">Guest Name</label><span class="text-danger">*</span>
-                                <p><?php echo $guestName ?></p>
+                                <p>{{ $guestName ?? '' }}</p>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
                                 <label class="form-label mb-0">Guest Vendor Mobile Number</label>
-                                <p><?php echo $guestMobile ?></p>
+                                <p>{{ $guestMobile ?? '' }}</p>
                             </div>
                         </div>
                     </div>
@@ -255,7 +255,9 @@
                         </div>
                     </div>
                 </form>
-                <button type="button" class="btn btn-primary save_button mt-3" onclick="invoicePayment()">Save</button>
+                @if (!$isPaid)
+                    <button type="button" class="btn btn-primary save_button mt-3" onclick="invoicePayment()">Save</button>
+                @endif
             </div>
         </div>
     </div>

@@ -60,7 +60,7 @@
                                     <td class="text-center">{{ $value->invoice_due_date }}</td>
                                     <td class="text-center">{{ $value->invoice_amount }}</td>
                                     <td class="text-center">{{ $value->boarder_name }}</td>
-                                    <td class="text-center">{{ $value->is_guest }}</td>
+                                    <td class="text-center">{{ ($value->is_guest) ? 'Yes':'No' }}</td>
                                     <td class="text-center">{{ ($value->is_paid) ? 'Paid':'Unpaid' }}</td>
                                     <td class="text-center">
                                         <div class="dropdown">

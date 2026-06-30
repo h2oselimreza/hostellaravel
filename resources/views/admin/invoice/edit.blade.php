@@ -27,6 +27,7 @@
                         $invoiceDueDate = $invoiceSummary['invoice_due_date'];
                         $invoiceNo = $invoiceSummary['invoice_no'];
                         //$totalAmount = $invoiceSummary['total_amount'];
+                        $isPaid  = $invoiceSummary['is_paid'];
                         $updateDtTm = $invoiceSummary['updated_dt_tm'];
                         $isGuest = $invoiceSummary['is_guest'];
                         $boarderPrimaryMobile = $invoiceSummary['boarder_primary_mobile'];
@@ -147,7 +148,9 @@
                                 }
                                 ?>
                                 <input type="hidden" id="takenItemSerial">
-                                <button type="button" class="btn btn-info save_button" onclick="showItemTable()">Add Item</button>
+                                @if (!$isPaid)
+                                    <button type="button" class="btn btn-info save_button" onclick="showItemTable()">Add Item</button>
+                                @endif
                                 <input type="hidden" id="takenItemSerial">
                                 <input type="hidden" name="invoiceNo" value="<?php echo $invoiceNo ?>">
                                 <input type="hidden" name="updateDtTm" value="<?php echo $updateDtTm ?>">
@@ -216,7 +219,9 @@
                             </div>
                         </div>	
                     </div>
-                    <button type="button" class="btn btn-primary save_button mt-3" onclick="editInvoice()">Save</button>
+                    @if (!$isPaid)
+                        <button type="button" class="btn btn-primary save_button mt-3" onclick="editInvoice()">Save</button>
+                    @endif
                 </div>
                 <!-- --------------- item head modal -------------------- -->
                 <button type="button" class="btn btn-default hidden" data-toggle="modal" data-target="#itemModal" id="itemModalBtn"></button>
