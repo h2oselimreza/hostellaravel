@@ -33,32 +33,47 @@
             'title' => 'General Info',
             'route' => isset($data) ? route('admin.master.data.vendor.edit', $data->vendor_code) : route('admin.master.data.vendor.create'),
             'active' => request()->routeIs('admin.master.data.vendor.create', 'admin.master.data.vendor.edit'),
+            'permission' => 'vendorGeneralInfo',
         ],
         [
             'title' => 'Images',
             'route' => isset($data) ? route('admin.vendor.image.edit', $data->vendor_code) : '#',
             'active' => request()->routeIs('admin.vendor.image.*'),
+            'permission' => 'vendorProfileImage',
         ],
         [
             'title' => 'Attachment',
             'route' => isset($data) ? route('admin.vendor.additional-images.edit', $data->vendor_code) : '#',
             'active' => request()->routeIs('admin.vendor.additional-images.*'),
+            'permission' => 'vendorAttachment',
         ],
     ];
 @endphp
 
+@php
+    $subModulesArr = get_sub_modules('admin/master-data/vendor');
+@endphp
+
+@if(empty($subModulesArr))
+    <script>
+        window.location.href = "{{ route('admin.dashboard') }}";
+    </script>
+@endif
+
 <div class="row text-center border-ccc vehicle mt-4">
     @foreach ($tabs as $tab)
-        <div class="col col-md-4">
-            <div class="btn-group d-block">
-                <a
-                    href="{{ $tab['route'] }}"
-                    class="btn btn-{{ $tab['active'] ? 'success' : 'default' }} custom-button-group {{ isset($data->exists) ? '' : '' }} 
-                    {{ ($disabled) && $tab['title'] != 'General Info' ? 'disabled' : '' }}">
-                    <i class="fa fa-list"></i>
-                    <b>{{ $tab['title'] }}</b>
-                </a>
+        @if(in_array($tab['permission'], $subModulesArr))
+            <div class="col col-md-{{ count($subModulesArr) == 1 ? '12' : (count($subModulesArr) == 2 ? '6' : '4') }}">
+                <div class="btn-group d-block">
+                    <a
+                        href="{{ $tab['route'] }}"
+                        class="btn btn-{{ $tab['active'] ? 'success' : 'default' }} custom-button-group {{ isset($data->exists) ? '' : '' }} 
+                        {{ ($disabled) && $tab['title'] != 'General Info' ? 'disabled' : '' }}">
+                        <i class="fa fa-list"></i>
+                        <b>{{ $tab['title'] }}</b>
+                    </a>
+                </div>
             </div>
-        </div>
+        @endif
     @endforeach
 </div>
