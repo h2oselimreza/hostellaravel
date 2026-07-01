@@ -120,6 +120,7 @@ use App\Http\Controllers\BuildingController;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 
 
@@ -344,6 +345,8 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::post('invoice-payment', [InvoicePaymentController::class, 'InvoicePayment'])->name('admin.invoice.invoicePayment');
     Route::get('invoice-payment/test-invoice/{invoiceNo}', [InvoicePaymentController::class, 'testInvoice'])->name('admin.invoice.test.invoice');
 
+    Route::get('invoice-payment/send-invoice-mail/{invoiceNo}', [InvoicePaymentController::class, 'sendInvoiceMail'])->name('admin.invoice.send.invoice.mail');
+
     Route::get('inv-generate', [InvoiceGenerateController::class, 'index'])->name('admin.invoice.generate');
     Route::post('inv-generate', [InvoiceGenerateController::class, 'doGenerate'])->name('admin.invoice-generate.doGenerate');
 
@@ -359,7 +362,15 @@ Route::middleware(['auth', 'panel:admin'])->prefix('admin')->group(function () {
     Route::get('loss-profit-report', [LossProfitReportController::class, 'index'])->name('admin.loss.profit.report');
     Route::post('loss-profit-report', [LossProfitReportController::class, 'lossProfitReportDetails'])->name('admin.loss.profit.report.details');
 
+    Route::get('/test-mail', function () {
 
+        Mail::raw('This is a test email from Laravel.', function ($message) {
+            $message->to('test@example.com')
+                    ->subject('Laravel Test Mail');
+        });
+
+        return 'Mail sent!';
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\InvoiceSummary;
 use App\Repositories\CommonRepository;
 use App\Repositories\InvoiceRepository;
+use App\Services\InvoiceService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -147,5 +148,30 @@ class InvoicePaymentController extends Controller
         $invoiceDetails = $invoiceRepository->getInvoiceDetails($arr);
 
         return view('admin.invoice.invoice-payment.test-invoice',compact('invoiceSummary','invoiceDetails'));
+    }
+
+    public function sendInvoiceMail(
+        $invoiceNo,
+        InvoiceService $invoiceService
+    ) {
+
+        $isInvoiceExists = InvoiceSummary::where('invoice_no', $invoiceNo)->exists();
+
+        if (!$isInvoiceExists) {
+            return redirect()
+                ->route('admin.invoice.payment.index')
+                ->with('error', 'Invoice is not found.');
+        }
+
+        $result = $invoiceService->sendInvoiceMail($invoiceNo);
+
+        if (!$result) {
+            return redirect()->route('admin.invoice.payment.index')
+            ->with('error', 'Failed to send the invoice email.');
+        }
+
+        return redirect()->route('admin.invoice.payment.index')
+        ->with('success','Invoice sent successfully.');
+
     }
 }

@@ -67,29 +67,31 @@
                                                 Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="{{ $value ? route('admin.invoice.payment.show', $value->invoice_no) : '#' }}" 
-                                                    class="d-block ps-3">
-                                                        <span class="ui-button-text">Make Payment</span>
-                                                    </a>                                    
-                                                </li>
 
+                                                @if (!$value->is_paid)
+                                                    <li>
+                                                        <a href="{{ $value ? route('admin.invoice.payment.show', $value->invoice_no) : '#' }}" 
+                                                        class="d-block ps-3">
+                                                            <span class="ui-button-text">Make Payment</span>
+                                                        </a>                                    
+                                                    </li>
+                                                @endif
+
+                                                @if (!$value->is_paid && !$value->mail_send_status)
+                                                    <li class="mt-2">
+                                                        <a href="{{ $value ? route('admin.invoice.send.invoice.mail', $value->invoice_no) : '#' }}"
+                                                        class="d-block ps-3">
+                                                            <span class="ui-button-text">Send a Email</span>
+                                                        </a>                                    
+                                                    </li>
+                                                 @endif
+                                                
                                                 <li class="mt-2">
                                                     <a href="{{ $value ? route('admin.invoice.test.invoice', $value->invoice_no) : '#' }}"
                                                     class="d-block ps-3">
                                                         <span class="ui-button-text">Test Invoice</span>
                                                     </a>                                    
                                                 </li>
-                                                {{-- <li class="mt-2">
-                                                    <form action="#" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="d-block ps-3 active_button">
-                                                            <span>
-                                                                {{ $value->is_active ? 'Inactive' : 'Active' }}
-                                                            </span>
-                                                        </button>
-                                                    </form>
-                                                </li> --}}
                                             </ul>
                                         </div>
                                     </td>
